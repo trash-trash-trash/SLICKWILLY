@@ -22,3 +22,15 @@
 -- added Timer
     -- Timer tracks current time and best time
     -- hitting escape in game now Pauses the game
+   
+1.3
+
+-- added Ocean Grid Generator.cs, OceanTile, and OceanType
+    -- OceanTiles are either Water or Oil
+    TODO: cleaning oil tiles changes them to water
+    -- Ocean Grid now spawns a grid of Ocean Tiles and uses perlin noise to generate random oil/water
+    -- can set how much percent the ocean is water/oil (always adds up to 100%)
+    TODO: Oscar's water texture conflicts with 1x1x1 cubes and other things, investigate
+
+-- Tank Controls now detects if the boat is in water/oil. Being in oil slows the overall speed
+TODO: Tweak, refactor (separate)
