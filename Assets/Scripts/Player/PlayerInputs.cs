@@ -118,6 +118,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""25958560-0ef2-4e2e-838d-9aa7ddf4ec1a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -241,6 +250,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d904bd1-06ce-4f4f-bd88-f95eeddd5c4b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -252,6 +272,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_InGameActionMap_Movement = m_InGameActionMap.FindAction("Movement", throwIfNotFound: true);
         m_InGameActionMap_Space = m_InGameActionMap.FindAction("Space", throwIfNotFound: true);
         m_InGameActionMap_Aim = m_InGameActionMap.FindAction("Aim", throwIfNotFound: true);
+        m_InGameActionMap_Escape = m_InGameActionMap.FindAction("Escape", throwIfNotFound: true);
     }
 
     ~@PlayerInputs()
@@ -335,6 +356,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGameActionMap_Movement;
     private readonly InputAction m_InGameActionMap_Space;
     private readonly InputAction m_InGameActionMap_Aim;
+    private readonly InputAction m_InGameActionMap_Escape;
     /// <summary>
     /// Provides access to input actions defined in input action map "InGameActionMap".
     /// </summary>
@@ -358,6 +380,10 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "InGameActionMap/Aim".
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_InGameActionMap_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/Escape".
+        /// </summary>
+        public InputAction @Escape => m_Wrapper.m_InGameActionMap_Escape;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -393,6 +419,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         /// <summary>
@@ -413,6 +442,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         /// <summary>
@@ -474,5 +506,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

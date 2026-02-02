@@ -10,8 +10,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     public event Action<Vector2> AnnounceMouseMoved;
 
+    public event Action<bool> AnnounceEscape;
+    
     public event Action<Vector2> AnnounceMovement;
-
+    
     public event Action<bool> AnnounceSpaceBar;
 
     public Vector2 moveInput;
@@ -23,6 +25,9 @@ public class PlayerInputHandler : MonoBehaviour
         
         playerControls.InGameActionMap.Aim.performed += OnAim;
         playerControls.InGameActionMap.Aim.canceled += OnAim;
+
+        playerControls.InGameActionMap.Escape.performed += OnEscape;
+        playerControls.InGameActionMap.Space.canceled += OnEscape;
         
         playerControls.InGameActionMap.Movement.performed += OnMove;
         playerControls.InGameActionMap.Movement.canceled += OnMove;
@@ -40,6 +45,12 @@ public class PlayerInputHandler : MonoBehaviour
     {
         mousePosition = context.ReadValue<Vector2>();
         AnnounceMouseMoved?.Invoke(mousePosition);
+    }
+
+    private void OnEscape(InputAction.CallbackContext context)
+    {
+        bool performed = context.performed;
+        AnnounceEscape?.Invoke(performed);
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -60,6 +71,9 @@ public class PlayerInputHandler : MonoBehaviour
         
         playerControls.InGameActionMap.Aim.performed -= OnAim;
         playerControls.InGameActionMap.Aim.canceled -= OnAim;
+        
+        playerControls.InGameActionMap.Escape.performed -= OnEscape;
+        playerControls.InGameActionMap.Space.canceled -= OnEscape;
         
         playerControls.InGameActionMap.Movement.performed -= OnMove;
         playerControls.InGameActionMap.Movement.canceled -= OnMove;

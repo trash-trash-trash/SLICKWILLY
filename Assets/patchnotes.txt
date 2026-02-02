@@ -16,3 +16,9 @@
 -- added Rope
     -- Rope is Cylinders w/Spring Joints, Top cylinder is connected to Boat rigidbody via Config Joint
     TODO: TWEAK JOINTS, RIGIDBODYS (limit y spin?)
+    
+1.2
+
+-- added Timer
+    -- Timer tracks current time and best time
+    -- hitting escape in game now Pauses the game
