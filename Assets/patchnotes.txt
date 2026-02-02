@@ -1,0 +1,18 @@
+1.0
+
+-- Added TMP_Text and Sprite Editor
+-- Added Scripts > Player 
+	-- added PlayerInput
+	-- added PlayerInputHandler (turns on and subs to PlayerInput, announces inputs via events)
+	-- added PlayerTransformMovement (reads handler to move up/down/left/right)
+
+1.1
+
+-- Added TankControls
+    -- boat accelerates / reverses with topSpeed limiter
+    -- boat spins w/AddTorque with spin Limiter
+    TODO: tweak RB, Physics Mat
+    
+-- added Rope
+    -- Rope is Cylinders w/Spring Joints, Top cylinder is connected to Boat rigidbody via Config Joint
+    TODO: TWEAK JOINTS, RIGIDBODYS (limit y spin?)
