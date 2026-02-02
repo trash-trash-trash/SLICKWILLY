@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -16,6 +17,11 @@ public class MotherShipModel : MonoBehaviour
 
     private int currentDestinationIndex;
 
+    public bool stopShip;
+    
+    private bool isMoving;
+    public Action<bool> movingEvent;
+
     void Start()
     {
         currentDestinationIndex = 0;
@@ -29,10 +35,21 @@ public class MotherShipModel : MonoBehaviour
         }
 
         Vector3 targetPos = destinations[currentDestinationIndex].transform.position;
-        
-        MoveTowards(targetPos);
-        LookAt(targetPos);
-        DestinationCheck(targetPos);
+
+        if(!stopShip)
+        {
+            MoveTowards(targetPos);
+            LookAt(targetPos);
+            DestinationCheck(targetPos);
+        }
+
+        bool currentlyMoving = rb.linearVelocity.sqrMagnitude > 0.01f;
+            
+        if (currentlyMoving != isMoving)
+        {
+            isMoving = currentlyMoving;
+            movingEvent?.Invoke(isMoving);
+        }
     }
     
     void MoveTowards(Vector3 targetPos)
