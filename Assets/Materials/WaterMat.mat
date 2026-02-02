@@ -57,7 +57,7 @@ Material:
     - _SpecularSize: 2.6
     - _SpecularSpeed: 0.75
     - _WaterDepth: 0.04
-    - _WaveAmplitude: 0.04
+    - _WaveAmplitude: 0.01
     - _WaveFrequency: 3.5
     - _WaveSpeed: 0.8
     m_Colors:
