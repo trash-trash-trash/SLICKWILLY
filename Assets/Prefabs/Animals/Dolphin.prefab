@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6913589327720163635}
   - component: {fileID: 4635362020366132597}
   - component: {fileID: 2811062637919771854}
+  - component: {fileID: 1512553837396724660}
   m_Layer: 0
   m_Name: Dolphin
   m_TagString: Untagged
@@ -182,10 +183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DolphinModel
   rb: {fileID: 2811062637919771854}
-  speed: 10
+  speed: 50
   maxspeed: 10
-  arrivalRadius: 10
-  destination: {x: 0, y: 0, z: 0}
+  turnSpeed: 360
+  oceanTileLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  invisibleWallLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  oilComponent: {fileID: 1512553837396724660}
 --- !u!54 &2811062637919771854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213,6 +220,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1512553837396724660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522853971572849395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d606307029677d14b824c285a9d3a836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OilComponent
+  isClean: 0
 --- !u!1 &6793524593273287036
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +601,7 @@ MonoBehaviour:
   mesh: {fileID: 5256625093718073235}
   oilMat: {fileID: 2100000, guid: 66dc74c9553da9e4d8f449f357a09e56, type: 2}
   cleanMat: {fileID: 2100000, guid: f7df352a45d78824babe54e2d6bddf81, type: 2}
+  oilComponent: {fileID: 1512553837396724660}
 --- !u!23 &5256625093718073235 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7635826562936255635, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
