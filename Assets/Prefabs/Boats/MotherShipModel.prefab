@@ -99,7 +99,7 @@ MonoBehaviour:
   speed: 5
   maxspeed: 5
   rotationSpeed: 3
-  arrivalRadius: 2
+  arrivalRadius: 10
   destinations:
   - {fileID: 0}
   - {fileID: 0}
