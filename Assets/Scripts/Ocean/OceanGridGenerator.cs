@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class OceanGridGenerator : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class OceanGridGenerator : MonoBehaviour
     public Vector2 perlinOffset;
 
     public float randomOffsetRange = 10000f;
+
+    public List<OilComponent> allOceanTilesOilComponents = new List<OilComponent>();
+
+    public event Action AnnounceOceanGenerated;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -42,8 +48,10 @@ public class OceanGridGenerator : MonoBehaviour
 
     public void SpawnGrid()
     {
-            for (int i = transform.childCount - 1; i >= 0; i--)
-                Destroy(transform.GetChild(i).gameObject);
+        allOceanTilesOilComponents.Clear();
+        
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            Destroy(transform.GetChild(i).gameObject);
 
         // Random perlin offset
         perlinOffset = new Vector2(
@@ -72,8 +80,22 @@ public class OceanGridGenerator : MonoBehaviour
                 tile.name = $"{prefabToSpawn.name}_{x}_{z}";
 
                 OceanTile oceanTile = tile.GetComponent<OceanTile>();
-                oceanTile.OceanType = (noise < oilThreshold) ? OceanType.Oil : OceanType.Water;
+                oceanTile.oceanType = (noise < oilThreshold) ? OceanType.Oil : OceanType.Water;
+
+                OilComponent oil = tile.GetComponent<OilComponent>();
+
+                oil.AnnounceCleanOrOily += (oilComp, isClean) => oceanTile.CleanDirty(isClean);
+
+                if
+                    (noise < oilThreshold)
+                    oil.Dirty();
+                else
+                    oil.Clean();
+
+                allOceanTilesOilComponents.Add(oil);
             }
         }
+
+        AnnounceOceanGenerated?.Invoke();
     }
 }

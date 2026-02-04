@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OceanTracker : MonoBehaviour
+{
+    [Header("References")] [SerializeField]
+    private OceanGridGenerator generator;
+
+    [Header("Lists (Debug)")] public List<OilComponent> totalTiles = new List<OilComponent>();
+    public List<OilComponent> cleanTiles = new List<OilComponent>();
+    public List<OilComponent> dirtyTiles = new List<OilComponent>();
+
+    [Header("Stats")] [Range(0f, 100f)] public float percentClean = 0f;
+
+    public event Action<float> AnnouncePercentClean;
+
+    private void OnEnable()
+    {
+        generator.AnnounceOceanGenerated += OnOceanGenerated;
+    }
+
+    private void OnOceanGenerated()
+    {
+        RefreshTracking(generator.allOceanTilesOilComponents);
+    }
+
+    public void RefreshTracking(List<OilComponent> found)
+    {
+        UnsubscribeAll();
+
+        totalTiles.Clear();
+        cleanTiles.Clear();
+        dirtyTiles.Clear();
+
+        foreach (OilComponent oil in found)
+        {
+            totalTiles.Add(oil);
+
+            if (oil.IsClean)
+                cleanTiles.Add(oil);
+            else
+                dirtyTiles.Add(oil);
+
+            oil.AnnounceCleanOrOily += OnTileCleanStateChanged;
+        }
+
+        RecalculatePercentClean();
+    }
+
+    private void UnsubscribeAll()
+    {
+        for (int i = 0; i < totalTiles.Count; i++)
+        {
+            totalTiles[i].AnnounceCleanOrOily -= OnTileCleanStateChanged;
+        }
+    }
+
+    private void OnTileCleanStateChanged(OilComponent tile, bool isCleanNow)
+    {
+        cleanTiles.Remove(tile);
+        dirtyTiles.Remove(tile);
+
+        if (isCleanNow)
+            cleanTiles.Add(tile);
+        else
+            dirtyTiles.Add(tile);
+
+        RecalculatePercentClean();
+    }
+
+    private void RecalculatePercentClean()
+    {
+        percentClean = (cleanTiles.Count / (float)totalTiles.Count) * 100f;
+
+        AnnouncePercentClean?.Invoke(percentClean);
+    }
+
+    private void OnDisable()
+    {
+        if (generator != null)
+            generator.AnnounceOceanGenerated -= OnOceanGenerated;
+
+        UnsubscribeAll();
+    }
+}

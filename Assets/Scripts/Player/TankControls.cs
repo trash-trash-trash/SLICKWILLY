@@ -81,6 +81,7 @@ public class TankControls : MonoBehaviour
         rb.angularVelocity = angVel;
     }
 
+    //caps rigidbody velocity at topSpeed
     private bool IsAtTopSpeed()
     {
         float currentTopSpeed = topSpeed * currentSpeedMultiplier;
@@ -99,7 +100,7 @@ public class TankControls : MonoBehaviour
         foreach (Collider hit in hits)
         {
             OceanTile tile = hit.GetComponent<OceanTile>();
-            if (tile != null && tile.OceanType == OceanType.Oil)
+            if (tile != null && tile.oceanType == OceanType.Oil)
             {
                 currentSpeedMultiplier = oilSpeedMultiplier;
                 break; //only need to find one oil tile to lower speed
