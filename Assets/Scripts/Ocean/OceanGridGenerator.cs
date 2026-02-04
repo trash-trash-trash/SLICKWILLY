@@ -5,15 +5,15 @@ using Random = UnityEngine.Random;
 
 public class OceanGridGenerator : MonoBehaviour
 {
-    [Header("References")] public GameObject waterPrefab;
+    [Header("Prefabs")] public GameObject waterPrefab;
     public GameObject oilPrefab;
+    public GameObject barrierPrefab;
 
     [Header("Grid Settings")] public int gridWidth = 10;
     public int gridLength = 10;
 
     [Header("Percentages (must total 100)")] [Range(0, 100)]
     public float oilPercent = 50f;
-
     [Range(0, 100)] public float waterPercent = 50f;
 
     [Header("Perlin Noise")] public float perlinScale = 0.2f;
@@ -93,6 +93,38 @@ public class OceanGridGenerator : MonoBehaviour
                     oil.Clean();
 
                 allOceanTilesOilComponents.Add(oil);
+                
+                bool isEdgeTile =
+                    x == 0 || x == gridWidth - 1 ||
+                    z == 0 || z == gridLength - 1;
+
+                if (isEdgeTile && barrierPrefab != null)
+                {
+                    float half = prefabWidth * 0.5f;
+
+                    Vector3 offset = Vector3.zero;
+                    Quaternion rot = Quaternion.identity;
+
+                    // push outward depending on which edge we're on
+                    if (x == 0)
+                        offset = new Vector3(-half, 0f, 0f);          // left wall
+                    else if (x == gridWidth - 1)
+                        offset = new Vector3(+half, 0f, 0f);          // right wall
+                    else if (z == 0)
+                    {
+                        offset = new Vector3(0f, 0f, -half);          // bottom wall
+                        rot = Quaternion.Euler(0f, 90f, 0f);
+                    }
+                    else if (z == gridLength - 1)
+                    {
+                        offset = new Vector3(0f, 0f, +half);          // top wall
+                        rot = Quaternion.Euler(0f, 90f, 0f);
+                    }
+
+                    GameObject barrier = Instantiate(barrierPrefab, pos + offset, rot, transform);
+                    barrier.name = $"Barrier_{x}_{z}";
+                }
+
             }
         }
 
