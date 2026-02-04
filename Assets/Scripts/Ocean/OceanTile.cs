@@ -15,7 +15,7 @@ public class OceanTile : MonoBehaviour, IOceanTile
         get => cleanWater;
         private set => cleanWater = value;
     }
-
+    
     public void Clean()
     {
         CleanWater = true;

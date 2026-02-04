@@ -39,14 +39,14 @@ public class AnimalSpawner : MonoBehaviour
             {
                 spawnPoint = spawnLocLeft[Random.Range(0, spawnLocLeft.Count)];
 
-                animal.transform.position = spawnPoint.position;
+                animal.transform.position = new Vector3(spawnPoint.position.x,0f,spawnPoint.position.z);
                 animal.transform.rotation = Quaternion.Euler(0, 90, 0);
             }
             else
             {
                 spawnPoint = spawnLocRight[Random.Range(0, spawnLocRight.Count)];
-                animal.transform.position = spawnPoint.position;
-                animal.transform.rotation = quaternion.Euler(0,-90,0);
+                animal.transform.position = new Vector3(spawnPoint.position.x,0f,spawnPoint.position.z);
+                animal.transform.rotation = Quaternion.Euler(0,-90,0);
             }
             
             animal.SetActive(true);

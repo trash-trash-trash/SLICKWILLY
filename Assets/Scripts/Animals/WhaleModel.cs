@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class DolphinModel : MonoBehaviour
+public class WhaleModel : MonoBehaviour
 {
     public Rigidbody rb;
 
