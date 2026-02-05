@@ -30,7 +30,7 @@ public class TankControls : MonoBehaviour
 
     public bool canControl = false;
 
-    public Action<bool> CameraEvent;
+    public Action<bool> AnnounceCameraEvent;
 
     void OnEnable()
     {
@@ -45,7 +45,7 @@ public class TankControls : MonoBehaviour
 
     private void CameraToggle(bool obj)
     {
-        CameraEvent?.Invoke(obj);
+        AnnounceCameraEvent?.Invoke(obj);
     }
 
     private void OnMoveInput(Vector2 input)

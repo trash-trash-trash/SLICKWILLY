@@ -27,7 +27,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.InGameActionMap.Aim.canceled += OnAim;
 
         playerControls.InGameActionMap.Escape.performed += OnEscape;
-        playerControls.InGameActionMap.Space.canceled += OnEscape;
+        playerControls.InGameActionMap.Escape.canceled += OnEscape;
         
         playerControls.InGameActionMap.Movement.performed += OnMove;
         playerControls.InGameActionMap.Movement.canceled += OnMove;
@@ -73,7 +73,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.InGameActionMap.Aim.canceled -= OnAim;
         
         playerControls.InGameActionMap.Escape.performed -= OnEscape;
-        playerControls.InGameActionMap.Space.canceled -= OnEscape;
+        playerControls.InGameActionMap.Escape.canceled -= OnEscape;
         
         playerControls.InGameActionMap.Movement.performed -= OnMove;
         playerControls.InGameActionMap.Movement.canceled -= OnMove;

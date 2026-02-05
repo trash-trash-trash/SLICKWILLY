@@ -21,7 +21,7 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-        tankControls.CameraEvent += CameraEvent;
+        tankControls.AnnounceCameraEvent += CameraEvent;
     }
 
     public void SetUpGame()
@@ -66,6 +66,6 @@ public class CameraManager : MonoBehaviour
 
     private void OnDisable()
     {
-        tankControls.CameraEvent -= CameraEvent;
+        tankControls.AnnounceCameraEvent -= CameraEvent;
     }
 }

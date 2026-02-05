@@ -800,7 +800,7 @@ Transform:
   m_GameObject: {fileID: 158641564}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 292, y: -36, z: 525}
+  m_LocalPosition: {x: 292, y: 0, z: 525}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1365,6 +1365,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389691171}
   m_CullTransparentMesh: 1
+--- !u!1 &440855139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 319182665026976534, guid: 383d73e791095a3479072265baff713d, type: 3}
+  m_PrefabInstance: {fileID: 1514352034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &456907887
 GameObject:
   m_ObjectHideFlags: 0
@@ -4827,7 +4832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 26294670219450277, guid: 383d73e791095a3479072265baff713d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 26294670219450277, guid: 383d73e791095a3479072265baff713d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5248,6 +5253,7 @@ MonoBehaviour:
   percentCleanObj: {fileID: 2117424266}
   tankControls: {fileID: 1402587720}
   cameraManager: {fileID: 90798252}
+  sampleScene: {fileID: 440855139}
 --- !u!114 &1630164250
 MonoBehaviour:
   m_ObjectHideFlags: 0
