@@ -16,8 +16,6 @@ public class DolphinModel : MonoBehaviour
 
     public LayerMask oceanTileLayer;
     public LayerMask invisibleWallLayer;
-    public LayerMask animalLayer;
-    public LayerMask playerLayer;
     
     public OilComponent oilComponent;
     
@@ -30,8 +28,8 @@ public class DolphinModel : MonoBehaviour
 
     void OnEnable()
     {
-        Physics.IgnoreLayerCollision(animalLayer, animalLayer);
-        Physics.IgnoreLayerCollision(animalLayer, playerLayer);
+        Physics.IgnoreLayerCollision(9, 9);
+        Physics.IgnoreLayerCollision(9, 3);
         oilComponent.Dirty();
     }
 

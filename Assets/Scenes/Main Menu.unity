@@ -6146,6 +6146,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1342548681918469700, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
+      propertyPath: growthMultiplier
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1476180910137904459, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -6460,11 +6464,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: topSpeed
-      value: 250
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: turnTorque
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: inputHandler
@@ -6472,11 +6476,11 @@ PrefabInstance:
       objectReference: {fileID: 1630164245}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: reverseForce
-      value: 400
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: topTurnSpeed
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: overlapSize.y
@@ -6488,7 +6492,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: accelerationForce
-      value: 500
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
+      propertyPath: cleanerLayer.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: currentSpeedMultiplier

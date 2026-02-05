@@ -1006,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4635362020366132597, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
       propertyPath: maxspeed
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4635362020366132597, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
       propertyPath: turnSpeed
@@ -1014,7 +1014,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4635362020366132597, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
       propertyPath: wallPauseTime
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635362020366132597, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
+      propertyPath: wallRepelForce
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4635362020366132597, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
       propertyPath: wallBounceForce

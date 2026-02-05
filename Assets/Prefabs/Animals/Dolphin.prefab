@@ -184,8 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DolphinModel
   rb: {fileID: 2811062637919771854}
-  speed: 150
-  maxspeed: 100
+  speed: 200
+  maxspeed: 85
   turnSpeed: 360
   turnAngleRange: 45
   oceanTileLayer:
@@ -201,9 +201,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   oilComponent: {fileID: 1512553837396724660}
-  wallBounceForce: 100
-  wallPauseTime: 0.25
-  wallRepelForce: 100
+  wallBounceForce: 1000
+  wallPauseTime: 1
+  wallRepelForce: 200
 --- !u!54 &2811062637919771854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1512553837396724660
 MonoBehaviour:
