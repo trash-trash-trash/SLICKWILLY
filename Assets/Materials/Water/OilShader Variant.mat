@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OceanShader Variant
+  m_Name: OilShader Variant
   m_Shader: {fileID: -6465566751694194690, guid: b0689aa07df25d84bb95d0e38c79cf4d, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: b0689aa07df25d84bb95d0e38c79cf4d, type: 3}
   m_ModifiedSerializedProperties: 0
@@ -33,7 +33,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _SpecularDensity
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
@@ -41,7 +41,11 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _SpecularDensity: 40
+    - _SpecularSize: 2.21
     - _WaveAmplitude: 0.01
-    m_Colors: []
+    m_Colors:
+    - _DeepColour: {r: 0, g: 0, b: 0, a: 1}
+    - _ShallowColour: {r: 0.09843354, g: 0.24403319, b: 0.2981131, a: 1}
+    - _SpecularColour: {r: 0, g: 0.078825995, b: 0.17735851, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
