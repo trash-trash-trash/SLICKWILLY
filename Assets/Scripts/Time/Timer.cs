@@ -31,13 +31,16 @@ public class Timer : MonoBehaviour
 
     private void PlayerHitEscape(bool obj)
     {
-        if (TimeIsRunning)
+        if(obj)
         {
-            Pause();
-        }
-        else
-        {
-            Resume();
+            if (TimeIsRunning)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
         }
     }
 
@@ -62,7 +65,6 @@ public class Timer : MonoBehaviour
         {
             bestTime = CurrentTime;
             aNewRecord = true;
-            Debug.Log("NEW BEST TIME: " + bestTime);
         }
     }
 

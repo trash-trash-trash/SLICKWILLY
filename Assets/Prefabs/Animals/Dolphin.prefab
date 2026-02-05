@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DolphinModel
   rb: {fileID: 2811062637919771854}
-  speed: 50
-  maxspeed: 10
+  speed: 100
+  maxspeed: 100
   turnSpeed: 360
   oceanTileLayer:
     serializedVersion: 2
@@ -201,7 +201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3522853971572849395}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

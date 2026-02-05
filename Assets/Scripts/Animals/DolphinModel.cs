@@ -8,16 +8,22 @@ public class DolphinModel : MonoBehaviour
     public float speed;
     public float maxspeed;
 
-    [Header("Turning")]
-    public float turnSpeed = 360f; 
-    
+    public float turnSpeed = 360f;
+    public float turnAngleRange = 45f;
+        
     private bool isTurning = false;
     private Quaternion targetRotation;
 
     public LayerMask oceanTileLayer;
     public LayerMask invisibleWallLayer;
 
+    
     public OilComponent oilComponent;
+
+    void OnEnable()
+    {
+        oilComponent.Dirty();
+    }
 
     void Update()
     {
@@ -51,10 +57,10 @@ public class DolphinModel : MonoBehaviour
         }
     }
 
-    //when dolphin hits barrier, spin 180 degrees to turn around, then random between -75 and 75
+    //when dolphin hits barrier, spin 180 degrees to turn around, then random between -turnAngleRange
     void StartTurnAround()
     {
-        float randomOffset = UnityEngine.Random.Range(-75f, 75f);
+        float randomOffset = UnityEngine.Random.Range(-turnAngleRange, turnAngleRange);
         float turnAmount = 180f + randomOffset;
 
         targetRotation = Quaternion.Euler(0f, transform.eulerAngles.y + turnAmount, 0f);

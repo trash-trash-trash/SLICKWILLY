@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public GameObject uiMainMenu;
+    public GameObject howToPlayObject;
     public GameObject setupGameMenu;
     public GameObject percentCleanObj;
     
@@ -12,7 +13,9 @@ public class MenuManager : MonoBehaviour
     public CameraManager cameraManager;
 
     public GameObject sampleScene;
+    public event Action AnnounceGameStarted;
 
+    //double check with replaying game
     private void Start()
     {
         sampleScene.SetActive(true);
@@ -29,12 +32,25 @@ public class MenuManager : MonoBehaviour
         setupGameMenu.SetActive(true);
     }
 
+    public void HowToPlay()
+    {
+        uiMainMenu.SetActive(false);
+        howToPlayObject.SetActive(true);
+    }
+
+    public void Back()
+    {
+        howToPlayObject.SetActive(false);
+        uiMainMenu.SetActive(true);
+    }
+
     public void StartGame()
     {
         cameraManager.RunGame();
         percentCleanObj.SetActive(true);
         setupGameMenu.SetActive(false);
         tankControls.FlipControlOnOff(true);
+        AnnounceGameStarted?.Invoke();
     }
 
     public void QuitBTN()
