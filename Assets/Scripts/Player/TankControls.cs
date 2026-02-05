@@ -29,11 +29,15 @@ public class TankControls : MonoBehaviour
     public float lateralFriction = 10f; 
 
     public bool canControl = false;
+    
+    public LayerMask playerLayer;
+    public LayerMask cleanerLayer;
 
     public Action<bool> AnnounceCameraEvent;
 
     void OnEnable()
     {
+        Physics.IgnoreLayerCollision(playerLayer, cleanerLayer);
         inputHandler.AnnounceMovement += OnMoveInput;
         inputHandler.AnnounceSpaceBar += CameraToggle;
     }
@@ -50,6 +54,8 @@ public class TankControls : MonoBehaviour
 
     private void OnMoveInput(Vector2 input)
     {
+        if (!canControl)
+            return;
         moveInput = input;
     }
 

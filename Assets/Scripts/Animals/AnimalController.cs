@@ -1,22 +1,29 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AnimalController : MonoBehaviour
 {
     public MenuManager menuManager;
     public OceanGridGenerator oceanGridGenerator;
 
-    public int numberOfDolphins;
+    public int numberOfDolphins=4;
+    public int numberOfWhales=1;
 
     public List<Vector3> allPositions = new List<Vector3>();
     public List<Vector3> randomLocations = new List<Vector3>();
 
     public GameObject dolphinPrefab;
+    public GameObject whalePrefab;
+    
     public float minDolphinSpacing = 3f;
     public int maxTriesPerDolphin = 20;
     public float yOffset = 1;
 
-    void Start()
+    public event Action AnnounceAnimalsSpawned;
+    
+    void OnEnable()
     {
         menuManager.AnnounceGameStarted += StartGame;
         oceanGridGenerator.AnnounceOceanGenerated += SetRandomLocations;
@@ -24,18 +31,34 @@ public class AnimalController : MonoBehaviour
 
     public void StartGame()
     {
-        foreach (Vector3 pos in randomLocations)
+        int index = 0;
+
+        for (int i = 0; i < numberOfDolphins; i++)
         {
-            Vector3 spawnPos = pos + Vector3.up * yOffset;
-
-            Quaternion rot = Quaternion.Euler(
-                0f,
-                Random.Range(0f, 360f),
-                0f
-            );
-
-            Instantiate(dolphinPrefab, spawnPos, rot);
+            Spawn(dolphinPrefab, randomLocations[index]);
+            index++;
         }
+
+        for (int i = 0; i < numberOfWhales; i++)
+        {
+            Spawn(whalePrefab, randomLocations[index]);
+            index++;
+        }
+        
+        AnnounceAnimalsSpawned?.Invoke();
+    }
+    
+    void Spawn(GameObject prefab, Vector3 pos)
+    {
+        Vector3 spawnPos = pos + Vector3.up * yOffset;
+
+        Quaternion rot = Quaternion.Euler(
+            0f,
+            Random.Range(0f, 360f),
+            0f
+        );
+
+        Instantiate(prefab, spawnPos, rot);
     }
 
     public void SetRandomLocations()
@@ -49,8 +72,8 @@ public class AnimalController : MonoBehaviour
         }
 
         if (allPositions.Count == 0) return;
-
-        for (int i = 0; i < numberOfDolphins; i++)
+        
+        for (int i = 0; i < numberOfDolphins + numberOfWhales; i++)
         {
             bool foundSpot = false;
 
@@ -82,7 +105,6 @@ public class AnimalController : MonoBehaviour
             }
         }
     }
-
 
     void OnDisable()
     {

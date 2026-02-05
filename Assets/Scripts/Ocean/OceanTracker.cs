@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OceanTracker : MonoBehaviour
 {
+    public AnimalController animalController;
     public OceanGridGenerator generator;
 
     public List<OilComponent> totalTiles = new List<OilComponent>();

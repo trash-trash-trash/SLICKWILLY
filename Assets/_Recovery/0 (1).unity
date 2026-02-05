@@ -6459,10 +6459,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: topSpeed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: turnTorque
       value: 50
       objectReference: {fileID: 0}
@@ -6471,24 +6467,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1630164245}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: reverseForce
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: topTurnSpeed
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: overlapSize.y
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: lateralFriction
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: accelerationForce
-      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: currentSpeedMultiplier

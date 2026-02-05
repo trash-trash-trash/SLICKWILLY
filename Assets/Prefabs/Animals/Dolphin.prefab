@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6543946892459190688}
   - component: {fileID: 834524380768902088}
   - component: {fileID: 7243487180615416879}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4635362020366132597}
   - component: {fileID: 2811062637919771854}
   - component: {fileID: 1512553837396724660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dolphin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6445189707196560149}
+  - {fileID: 2009166731495371572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3818274682157015833
@@ -183,16 +184,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DolphinModel
   rb: {fileID: 2811062637919771854}
-  speed: 100
+  speed: 150
   maxspeed: 100
   turnSpeed: 360
+  turnAngleRange: 45
   oceanTileLayer:
     serializedVersion: 2
     m_Bits: 128
   invisibleWallLayer:
     serializedVersion: 2
     m_Bits: 256
+  animalLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   oilComponent: {fileID: 1512553837396724660}
+  wallBounceForce: 100
+  wallPauseTime: 0.25
+  wallRepelForce: 100
 --- !u!54 &2811062637919771854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -218,7 +229,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &1512553837396724660
 MonoBehaviour:
@@ -233,6 +244,150 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OilComponent
   isClean: 0
+--- !u!1 &6105482315154562676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2009166731495371572}
+  - component: {fileID: 637862221985592295}
+  - component: {fileID: 7343728599116338203}
+  m_Layer: 9
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2009166731495371572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6105482315154562676}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6959481609334283564}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &637862221985592295
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6105482315154562676}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: cdc1c28bd29c21a4d9392b75ec29d6dc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7343728599116338203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6105482315154562676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b5ff493e2d7e40a948ac498965948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalNoise
+  oilComponent: {fileID: 1512553837396724660}
+  audioSource: {fileID: 637862221985592295}
 --- !u!1 &6793524593273287036
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +399,7 @@ GameObject:
   - component: {fileID: 6716103267927475302}
   - component: {fileID: 5917179630862312552}
   - component: {fileID: 8057332111288276533}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pupil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +489,7 @@ GameObject:
   - component: {fileID: 6790625695357563986}
   - component: {fileID: 4026234798309013345}
   - component: {fileID: 2359030890953099705}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +580,7 @@ GameObject:
   - component: {fileID: 3401259191536960049}
   - component: {fileID: 3573901730532407029}
   - component: {fileID: 8399520144059385336}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pupil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,9 +715,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: DolphinObj
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
       propertyPath: m_Name
       value: DolphinView
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

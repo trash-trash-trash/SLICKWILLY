@@ -7,12 +7,23 @@ public class WhaleView : MonoBehaviour
     public Material oilMat;
 
     public Material cleanMat;
+
+    public OilComponent oilComponent;
     
     private void OnEnable()
     {
-        SetMaterials(cleanMat);
+        oilComponent.AnnounceCleanOrOily += CleanDirty;
+        DirtyWhale();
     }
-    
+
+    private void CleanDirty(OilComponent arg1, bool arg2)
+    {
+        if(arg2)
+            CleanWhale();
+        else
+            DirtyWhale();
+    }
+
     public void DirtyWhale()
     {
         SetMaterials(oilMat);

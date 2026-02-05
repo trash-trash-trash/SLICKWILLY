@@ -17,6 +17,7 @@ public class OceanGridGenerator : MonoBehaviour
     [Range(0, 100)] public float waterPercent = 50f;
 
     [Header("Perlin Noise")] public float perlinScale = 0.2f;
+    
     public Vector2 perlinOffset;
 
     public float randomOffsetRange = 10000f;
@@ -58,6 +59,9 @@ public class OceanGridGenerator : MonoBehaviour
             Random.Range(-randomOffsetRange, randomOffsetRange),
             Random.Range(-randomOffsetRange, randomOffsetRange)
         );
+
+        //hard coded but idc looks good to me
+        perlinScale = Random.Range(0.035f, 0.075f);
 
         float oilThreshold = oilPercent / 100f;
 

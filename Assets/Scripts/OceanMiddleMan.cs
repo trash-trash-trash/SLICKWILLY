@@ -28,7 +28,6 @@ public class OceanMiddleMan : MonoBehaviour
 
     private void EndGame(float obj)
     {
-        tankControls.FlipControlOnOff(false);
         if (obj == 100)
         {
             gameOverCanvasObj.SetActive(true);
