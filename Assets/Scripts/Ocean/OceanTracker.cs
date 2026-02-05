@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class OceanTracker : MonoBehaviour
 {
-    [Header("References")] [SerializeField]
-    private OceanGridGenerator generator;
+    public OceanGridGenerator generator;
 
-    [Header("Lists (Debug)")] public List<OilComponent> totalTiles = new List<OilComponent>();
+    public List<OilComponent> totalTiles = new List<OilComponent>();
     public List<OilComponent> cleanTiles = new List<OilComponent>();
     public List<OilComponent> dirtyTiles = new List<OilComponent>();
 
-    [Header("Stats")] [Range(0f, 100f)] public float percentClean = 0f;
+    [Range(0f, 100f)] public float percentClean = 0f;
 
     public event Action<float> AnnouncePercentClean;
 
@@ -74,6 +73,14 @@ public class OceanTracker : MonoBehaviour
         percentClean = (cleanTiles.Count / (float)totalTiles.Count) * 100f;
 
         AnnouncePercentClean?.Invoke(percentClean);
+
+        if (percentClean == 100)
+            EndGame();
+    }
+
+    void EndGame()
+    {
+        
     }
 
     private void OnDisable()

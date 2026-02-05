@@ -4,30 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Canvas uiMainMenu;
+    public GameObject uiMainMenu;
+    public GameObject setupGameMenu;
 
     private void Start()
     {
-        uiMainMenu.enabled = true;
+        uiMainMenu.SetActive(true);
+        setupGameMenu.SetActive(false);
     }
-    
-    public void StartBTN()
+
+    public void SetupGame()
     {
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        uiMainMenu.SetActive(false);
+        setupGameMenu.SetActive(true);
     }
-    
-    public void TimeTrialsBTN()
-    {
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
-    }
-    
-    public void OptionsBTN()
-    {
-        
-    }
-    
+
     public void QuitBTN()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
     }
 }
