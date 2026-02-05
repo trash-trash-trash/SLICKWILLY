@@ -14,7 +14,16 @@ public class MusicPlayer : MonoBehaviour
 
     private float ominousCurrent = 0f;
 
+    public OceanTracker oceanTracker;
+
     void Start()
+    {
+        oceanTracker.AnnouncePercentClean += SetOminous;
+        StartSong();
+    }
+
+    //make it play on game start
+    void StartSong()
     {
         sourceA.loop = true;
         sourceB.loop = true;
@@ -39,8 +48,14 @@ public class MusicPlayer : MonoBehaviour
         sourceB.volume = Mathf.Sin(ominousCurrent * Mathf.PI * 0.5f);
     }
 
-    public void SetOminous(float value01)
+    public void SetOminous(float percentClean)
     {
-        ominousTarget = Mathf.Clamp01(value01);
+        float clean01 = Mathf.Clamp01(percentClean / 100f);
+        ominousTarget = 1f - clean01;
+    }
+
+    void OnDisable()
+    {
+        oceanTracker.AnnouncePercentClean -= SetOminous;
     }
 }
