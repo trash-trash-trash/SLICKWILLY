@@ -322,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 825d93826a00cbf4e89330cb47e02cfc, type: 2}
+  - {fileID: 2100000, guid: 35a77f2278cd98d4caa0bd7b1839a5d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -362,14 +362,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158641564}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -53, z: 0}
+  m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1091063136}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387956423
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,12 +929,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091063133}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.72781557, y: -0.3128405, z: -0.24141869, w: 0.56047505}
-  m_LocalPosition: {x: 16.217907, y: -0.25491074, z: 2.5250719}
-  m_LocalScale: {x: 0.02, y: 0.019999994, z: 0.019999994}
+  m_LocalRotation: {x: 0.11832765, y: -0.39192045, z: 0.050502837, w: 0.9109591}
+  m_LocalPosition: {x: 810.8953, y: 126.25361, z: 12.745522}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 158641568}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 119.873, y: 0, z: 0}
 --- !u!114 &1091063137
 MonoBehaviour:
@@ -1635,7 +1634,8 @@ PrefabInstance:
       value: 94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 431026839116378281, guid: 383d73e791095a3479072265baff713d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 383d73e791095a3479072265baff713d, type: 3}
@@ -2025,5 +2025,6 @@ SceneRoots:
   - {fileID: 1509380662}
   - {fileID: 1390108850}
   - {fileID: 996965025}
+  - {fileID: 1091063136}
   - {fileID: 158641568}
   - {fileID: 1514352034}
