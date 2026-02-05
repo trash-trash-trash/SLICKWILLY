@@ -1075,7 +1075,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341960584194820557}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 25
   m_LinearDamping: 1
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1108,11 +1108,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankControls
   inputHandler: {fileID: 0}
   rb: {fileID: 567556954471655591}
-  accelerationForce: 50
-  reverseForce: 40
-  turnTorque: 25
-  topSpeed: 25
-  topTurnSpeed: 1
+  accelerationForce: 1000
+  reverseForce: 1000
+  turnTorque: 250
+  topSpeed: 1000
+  topTurnSpeed: 250
   oilSpeedMultiplier: 0.7
   currentSpeedMultiplier: 1
   oceanTileLayer:
@@ -1120,6 +1120,7 @@ MonoBehaviour:
     m_Bits: 128
   overlapSize: {x: 1, y: 1, z: 1}
   overlapOffset: {x: 0, y: 0, z: 0}
+  lateralFriction: 1000
   canControl: 0
 --- !u!1 &6915601116944114475
 GameObject:
