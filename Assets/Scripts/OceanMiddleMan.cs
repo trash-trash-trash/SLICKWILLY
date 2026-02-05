@@ -14,9 +14,16 @@ public class OceanMiddleMan : MonoBehaviour
 
     public Timer timer;
 
+    public MenuManager menuManager;
+    
     private void Start()
     {
         oceanTracker.AnnouncePercentClean += EndGame;
+    }
+
+    public void Replay()
+    {
+        menuManager.cameraManager.SetUpGame();
     }
 
     private void EndGame(float obj)
