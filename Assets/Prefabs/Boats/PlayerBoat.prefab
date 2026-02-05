@@ -1113,13 +1113,14 @@ MonoBehaviour:
   turnTorque: 25
   topSpeed: 25
   topTurnSpeed: 1
-  oilSpeedMultiplier: 0.4
+  oilSpeedMultiplier: 0.7
   currentSpeedMultiplier: 1
   oceanTileLayer:
     serializedVersion: 2
     m_Bits: 128
   overlapSize: {x: 1, y: 1, z: 1}
   overlapOffset: {x: 0, y: 0, z: 0}
+  canControl: 0
 --- !u!1 &6915601116944114475
 GameObject:
   m_ObjectHideFlags: 0

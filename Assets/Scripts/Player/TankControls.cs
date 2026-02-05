@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TankControls : MonoBehaviour
@@ -22,9 +21,16 @@ public class TankControls : MonoBehaviour
     public float currentSpeedMultiplier = 1f;
 
     [Header("Surface Detection")]
-    public LayerMask oceanTileLayer;  
-    public Vector3 overlapSize = new Vector3(1f, 1f, 1f); 
-    public Vector3 overlapOffset = new Vector3(0f, -0.5f, 0f); 
+    public LayerMask oceanTileLayer;
+    public Vector3 overlapSize = new Vector3(1f, 1f, 1f);
+    public Vector3 overlapOffset = new Vector3(0f, -0.5f, 0f);
+
+    [Header("Lateral Friction")]
+    public float lateralFriction = 10f; 
+
+    public bool canControl = false;
+
+    public Action<bool> CameraEvent;
 
     void OnEnable()
     {
@@ -32,7 +38,11 @@ public class TankControls : MonoBehaviour
         inputHandler.AnnounceSpaceBar += CameraToggle;
     }
 
-    public Action<bool> CameraEvent;
+    public void FlipControlOnOff(bool input)
+    {
+        canControl = input;
+    }
+
     private void CameraToggle(bool obj)
     {
         CameraEvent?.Invoke(obj);
@@ -56,32 +66,32 @@ public class TankControls : MonoBehaviour
             Reverse(-forwardInput);
         if (Mathf.Abs(turnInput) > 0.01f)
             Spin(turnInput);
+
+        ApplyLateralFriction(); // <-- new
     }
 
     private void Accelerate(float amount)
     {
-        if (IsAtTopSpeed()) return;
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float currentTopSpeed = topSpeed * currentSpeedMultiplier;
+        float speedFactor = Mathf.Clamp01(1f - flatVel.magnitude / currentTopSpeed);
 
         Vector3 forward = rb.rotation * Vector3.forward;
-        rb.AddForce(forward * (accelerationForce * currentSpeedMultiplier * amount), ForceMode.Force);
+        rb.AddForce(forward * (accelerationForce * currentSpeedMultiplier * amount * speedFactor), ForceMode.Force);
     }
 
     private void Reverse(float amount)
     {
-        if (IsAtTopSpeed()) return;
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float currentTopSpeed = topSpeed * currentSpeedMultiplier;
+        float speedFactor = Mathf.Clamp01(1f - flatVel.magnitude / currentTopSpeed);
 
         Vector3 forward = rb.rotation * Vector3.forward;
-        rb.AddForce(-forward * (reverseForce * currentSpeedMultiplier * amount), ForceMode.Force);
+        rb.AddForce(-forward * (reverseForce * currentSpeedMultiplier * amount * speedFactor), ForceMode.Force);
     }
 
     private void Spin(float amount)
     {
-        float currentTurnSpeed = rb.angularVelocity.y;
-
-        if (Mathf.Abs(currentTurnSpeed) >= topTurnSpeed &&
-            Mathf.Sign(currentTurnSpeed) == Mathf.Sign(amount))
-            return;
-
         rb.AddTorque(Vector3.up * (turnTorque * amount), ForceMode.Force);
 
         Vector3 angVel = rb.angularVelocity;
@@ -89,20 +99,11 @@ public class TankControls : MonoBehaviour
         rb.angularVelocity = angVel;
     }
 
-    //caps rigidbody velocity at topSpeed
-    private bool IsAtTopSpeed()
-    {
-        float currentTopSpeed = topSpeed * currentSpeedMultiplier;
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        return flatVel.magnitude >= currentTopSpeed;
-    }
-
     private void CheckSurface()
     {
         currentSpeedMultiplier = 1f;
 
         Vector3 center = transform.position + overlapOffset;
-
         Collider[] hits = Physics.OverlapBox(center, overlapSize * 0.5f, Quaternion.identity, oceanTileLayer);
 
         foreach (Collider hit in hits)
@@ -111,13 +112,23 @@ public class TankControls : MonoBehaviour
             if (tile != null && tile.oceanType == OceanType.Oil)
             {
                 currentSpeedMultiplier = oilSpeedMultiplier;
-                break; //only need to find one oil tile to lower speed
+                break;
             }
         }
+    }
+
+    private void ApplyLateralFriction()
+    {
+        Vector3 localVel = transform.InverseTransformDirection(rb.linearVelocity);
+
+        Vector3 lateralForce = new Vector3(-localVel.x * lateralFriction, 0f, 0f);
+
+        rb.AddRelativeForce(lateralForce, ForceMode.Force);
     }
 
     void OnDisable()
     {
         inputHandler.AnnounceMovement -= OnMoveInput;
+        inputHandler.AnnounceSpaceBar -= CameraToggle;
     }
 }

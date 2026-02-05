@@ -6,6 +6,9 @@ public class OceanMiddleMan : MonoBehaviour
 {
     public OceanTracker oceanTracker;
     public GameObject gameOverCanvasObj;
+
+    public TankControls tankControls;
+    
     public TMP_Text aNewRecordText;
     public TMP_Text timeTaken;
 
@@ -18,6 +21,7 @@ public class OceanMiddleMan : MonoBehaviour
 
     private void EndGame(float obj)
     {
+        tankControls.FlipControlOnOff(false);
         if (obj == 100)
         {
             gameOverCanvasObj.SetActive(true);

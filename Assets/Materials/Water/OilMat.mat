@@ -39,6 +39,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _QueueControl: 0
     - _SpecularDensity: 40
     - _SpecularSize: 2
     - _WaveAmplitude: 0.1

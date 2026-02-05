@@ -41,7 +41,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _SpecularDensity: 40
-    - _WaveAmplitude: 0.01
+    - _WaveAmplitude: 0.001
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
