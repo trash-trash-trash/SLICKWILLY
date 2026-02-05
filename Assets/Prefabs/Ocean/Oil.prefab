@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2723677720912336960
 Transform:
@@ -140,6 +140,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OceanTile
   oceanType: 1
-  oilMaterial: {fileID: 2100000, guid: 283cc5282b12f7b439c304ca6bb3a81a, type: 2}
-  waterMaterial: {fileID: 2100000, guid: 35a77f2278cd98d4caa0bd7b1839a5d3, type: 2}
   renderer: {fileID: 1081922161833978305}

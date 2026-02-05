@@ -125,4 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4e118d7a2089f48af4191946fc5c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OceanTile
-  OceanType: 0
+  oceanType: 0
+  oilMaterial: {fileID: 0}
+  waterMaterial: {fileID: 0}
+  renderer: {fileID: 0}

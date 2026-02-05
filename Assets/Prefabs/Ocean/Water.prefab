@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7298126041367048619}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 35a77f2278cd98d4caa0bd7b1839a5d3, type: 2}
+  - {fileID: 2100000, guid: 283cc5282b12f7b439c304ca6bb3a81a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,8 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OceanTile
   oceanType: 0
-  oilMaterial: {fileID: 2100000, guid: 283cc5282b12f7b439c304ca6bb3a81a, type: 2}
-  waterMaterial: {fileID: 2100000, guid: 35a77f2278cd98d4caa0bd7b1839a5d3, type: 2}
   renderer: {fileID: 5676048872038939901}
 --- !u!114 &8792783865596201898
 MonoBehaviour:

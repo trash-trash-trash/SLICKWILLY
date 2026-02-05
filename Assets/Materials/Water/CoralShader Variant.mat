@@ -40,8 +40,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _SpecularDensity: 40
-    - _WaveAmplitude: 0.01
-    m_Colors: []
+    - _SpecularDensity: 240.3
+    - _SpecularSize: 6
+    - _WaveAmplitude: 0
+    m_Colors:
+    - _DeepColour: {r: 0.15471691, g: 0.12884605, b: 0.08378066, a: 1}
+    - _ShallowColour: {r: 0.23137255, g: 0.7921569, b: 1, a: 1}
+    - _SpecularColour: {r: 1, g: 0.94968677, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

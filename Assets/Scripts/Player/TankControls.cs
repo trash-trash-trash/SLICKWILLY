@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,13 @@ public class TankControls : MonoBehaviour
     void OnEnable()
     {
         inputHandler.AnnounceMovement += OnMoveInput;
+        inputHandler.AnnounceSpaceBar += CameraToggle;
+    }
+
+    public Action<bool> CameraEvent;
+    private void CameraToggle(bool obj)
+    {
+        CameraEvent?.Invoke(obj);
     }
 
     private void OnMoveInput(Vector2 input)

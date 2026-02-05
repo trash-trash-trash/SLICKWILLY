@@ -4,10 +4,7 @@ using UnityEngine;
 public class OceanTile : MonoBehaviour
 {
     public OceanType oceanType = OceanType.Water;
-   
-    public Material oilMaterial;
-    public Material waterMaterial;
-
+    
     private bool cleanWater = false;
     public Renderer renderer;
 
@@ -31,12 +28,12 @@ public class OceanTile : MonoBehaviour
     {
         if(clean)
         {
-            renderer.sharedMaterial = waterMaterial;
+            renderer.enabled = false;
             oceanType = OceanType.Water;
         }
         else
         {
-            renderer.sharedMaterial = oilMaterial;
+            renderer.enabled = true;
             oceanType = OceanType.Oil;
         }
     }
