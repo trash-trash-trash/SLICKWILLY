@@ -100,10 +100,7 @@ MonoBehaviour:
   maxspeed: 5
   rotationSpeed: 3
   arrivalRadius: 10
-  destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  destinations: []
   stopShip: 0
 --- !u!1001 &6040549066705892504
 PrefabInstance:
@@ -190,8 +187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MotherShipView
   model: {fileID: 8718883108047114435}
   shipAudio: {fileID: 3605748883445541934}
-  minBargeSoundLength: 5
-  maxBargeSoundLength: 10
+  minBargeSoundLength: 10
+  maxBargeSoundLength: 30
   splashParticles:
   - {fileID: 7865120050484732574}
 --- !u!82 &3605748883445541934
@@ -215,7 +212,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 50
+  MinDistance: 40
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
