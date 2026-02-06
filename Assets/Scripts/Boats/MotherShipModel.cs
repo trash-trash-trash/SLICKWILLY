@@ -19,7 +19,7 @@ public class MotherShipModel : MonoBehaviour
     public bool stopShip;
     
     private bool isMoving;
-    public Action<bool> movingEvent;
+    public Action<bool> MovingEvent;
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class MotherShipModel : MonoBehaviour
         if (currentlyMoving != isMoving)
         {
             isMoving = currentlyMoving;
-            movingEvent?.Invoke(isMoving);
+            MovingEvent?.Invoke(isMoving);
         }
     }
     

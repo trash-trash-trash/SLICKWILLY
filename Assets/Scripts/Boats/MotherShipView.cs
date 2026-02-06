@@ -17,7 +17,7 @@ public class MotherShipView : MonoBehaviour
 
     private void OnEnable()
     {
-        model.movingEvent += MovingEvent;
+        model.MovingEvent += MovingEvent;
     }
 
     private void MovingEvent(bool obj)

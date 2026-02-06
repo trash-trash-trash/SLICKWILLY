@@ -1,18 +1,39 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TugBoatView : MonoBehaviour
 {
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public TankControls model;
+
+    public ParticleSystem splashParticles;
+
+    private void OnEnable()
     {
-        
+        model.MovingEvent += MovingEvent;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MovingEvent(bool obj)
     {
-        
+        if (obj)
+        {
+            splashParticles.Play();
+        }
+        else
+        {
+            splashParticles.Stop();
+        }
+    }
+    void FixedUpdate()
+    {
+        if (model.isOily)
+        {
+            var splashParticlesColorOverLifetime = splashParticles.colorOverLifetime;
+            splashParticlesColorOverLifetime.color = new ParticleSystem.MinMaxGradient(Color.black, Color.clear);
+        }
+        else
+        {
+            var splashParticlesColorOverLifetime = splashParticles.colorOverLifetime;
+            splashParticlesColorOverLifetime.color = new ParticleSystem.MinMaxGradient(Color.white, Color.clear);
+        }
     }
 }

@@ -33,6 +33,9 @@ public class TankControls : MonoBehaviour
     public LayerMask playerLayer;
     public LayerMask cleanerLayer;
 
+    public bool isMoving;
+    public bool isOily;
+    public Action<bool> MovingEvent;
     public Action<bool> AnnounceCameraEvent;
 
     void OnEnable()
@@ -74,6 +77,14 @@ public class TankControls : MonoBehaviour
             Spin(turnInput);
 
         ApplyLateralFriction(); // <-- new
+        
+        bool currentlyMoving = rb.linearVelocity.sqrMagnitude > 0.01f;
+            
+        if (currentlyMoving != isMoving)
+        {
+            isMoving = currentlyMoving;
+            MovingEvent?.Invoke(isMoving);
+        }
     }
 
     private void Accelerate(float amount)
@@ -107,6 +118,7 @@ public class TankControls : MonoBehaviour
 
     private void CheckSurface()
     {
+        isOily = false;
         currentSpeedMultiplier = 1f;
 
         Vector3 center = transform.position + overlapOffset;
@@ -118,6 +130,7 @@ public class TankControls : MonoBehaviour
             if (tile != null && tile.oceanType == OceanType.Oil)
             {
                 currentSpeedMultiplier = oilSpeedMultiplier;
+                isOily = true;
                 break;
             }
         }
