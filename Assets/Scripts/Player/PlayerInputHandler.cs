@@ -68,7 +68,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     void OnDisable()
     {
-        
         playerControls.InGameActionMap.Aim.performed -= OnAim;
         playerControls.InGameActionMap.Aim.canceled -= OnAim;
         

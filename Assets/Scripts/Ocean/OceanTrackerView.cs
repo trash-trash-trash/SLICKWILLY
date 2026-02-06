@@ -16,4 +16,9 @@ public class OceanTrackerView : MonoBehaviour
     {
         percentText.text = obj.ToString()+"%";
     }
+
+    void OnDisable()
+    {
+        oceanTracker.AnnouncePercentClean -= SetPercentText;
+    }
 }

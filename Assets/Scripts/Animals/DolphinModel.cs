@@ -33,6 +33,7 @@ public class DolphinModel : MonoBehaviour
     {
         oilComponent = GetComponent<OilComponent>();
         wobbleSeed = Random.Range(0f, 1000f);
+        Physics.IgnoreLayerCollision(9,9);
     }
 
     void FixedUpdate()

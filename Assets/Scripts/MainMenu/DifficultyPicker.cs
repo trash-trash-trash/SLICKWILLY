@@ -12,7 +12,8 @@ public enum Difficulty
 public class DifficultyPicker : MonoBehaviour
 {
     public OceanGridGenerator oceanGenerator;
-
+    public AnimalController animalController;
+    
     public TMP_Dropdown dropdown;
     public Difficulty currentDifficulty;
 
@@ -39,15 +40,23 @@ public class DifficultyPicker : MonoBehaviour
         switch (currentDifficulty)
         {
             case Difficulty.Easy:
-                oceanGenerator.oilPercent = 20f;
+                oceanGenerator.oilPercent = 10f;
+                animalController.numberOfDolphins = 3;
+                animalController.numberOfWhales = 1;
                 break;
 
             case Difficulty.Medium:
-                oceanGenerator.oilPercent = 50f;
+                oceanGenerator.oilPercent = 30f;
+                
+                animalController.numberOfDolphins = 4;
+                animalController.numberOfWhales = 1;
                 break;
 
             case Difficulty.Hard:
-                oceanGenerator.oilPercent = 80f;
+                oceanGenerator.oilPercent = 66.6f;
+                
+                animalController.numberOfDolphins = 5;
+                animalController.numberOfWhales = 2;
                 break;
         }
 

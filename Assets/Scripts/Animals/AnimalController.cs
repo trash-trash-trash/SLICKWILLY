@@ -20,7 +20,9 @@ public class AnimalController : MonoBehaviour
     public float minDolphinSpacing = 3f;
     public int maxTriesPerDolphin = 20;
     public float yOffset = 1;
-
+    
+    public List<GameObject> animalsSpawned = new List<GameObject>();
+    
     public event Action AnnounceAnimalsSpawned;
     
     void OnEnable()
@@ -58,8 +60,23 @@ public class AnimalController : MonoBehaviour
             0f
         );
 
-        Instantiate(prefab, spawnPos, rot);
+        GameObject spawnedAnimal = Instantiate(prefab, spawnPos, rot);
+        animalsSpawned.Add(spawnedAnimal);
     }
+
+    public void ResetAnimals()
+    {
+        List<GameObject> copy = new List<GameObject>(animalsSpawned);
+
+        foreach (GameObject animal in copy)
+        {
+            animalsSpawned.Remove(animal);
+            Destroy(animal);
+        }
+
+        animalsSpawned.Clear();
+    }
+
 
     public void SetRandomLocations()
     {

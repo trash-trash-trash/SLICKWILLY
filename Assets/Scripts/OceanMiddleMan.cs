@@ -4,27 +4,24 @@ using UnityEngine;
 
 public class OceanMiddleMan : MonoBehaviour
 {
-    public OceanTracker oceanTracker;
+    public AnimalController animalController;
+    public CameraManager camManager;
     public GameObject gameOverCanvasObj;
-
+    public MenuManager menuManager;
+    public OceanTracker oceanTracker;
+    public OceanGridGenerator oceanGenerator;
     public TankControls tankControls;
-    
+    public Timer timer;
+
     public TMP_Text aNewRecordText;
     public TMP_Text timeTaken;
 
-    public Timer timer;
-
-    public MenuManager menuManager;
     
     private void Start()
     {
         oceanTracker.AnnouncePercentClean += EndGame;
     }
 
-    public void Replay()
-    {
-        menuManager.cameraManager.SetUpGame();
-    }
 
     private void EndGame(float obj)
     {
@@ -40,5 +37,22 @@ public class OceanMiddleMan : MonoBehaviour
             
             timeTaken.text = timer.bestTime.ToString();
         }
+    }
+
+    public void Replay()
+    {
+        animalController.ResetAnimals();
+        gameOverCanvasObj.SetActive(false);
+        camManager.SetUpGame();
+        tankControls.FlipControlOnOff(false);
+        //lmao
+        tankControls.gameObject.transform.position = new Vector3(110f, 2.03f, 100f);
+        menuManager.setupGameMenu.SetActive(true);
+        oceanGenerator.SpawnGrid();
+    }
+
+    void OnDisable()
+    {
+        oceanTracker.AnnouncePercentClean -= EndGame;
     }
 }
