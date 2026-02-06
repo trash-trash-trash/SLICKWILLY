@@ -22,6 +22,11 @@ public class Cleaner : MonoBehaviour
 	// 	}
 	// }
 
+	void OnEnable()
+	{
+		Physics.IgnoreLayerCollision(8, 10);
+	}
+	
 	private void OnTriggerEnter(Collider other)
     {
 	    var colour = splashParticles.colorOverLifetime;

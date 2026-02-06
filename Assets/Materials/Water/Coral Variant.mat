@@ -26,6 +26,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _QueueControl: 0
     - _SpecularDensity: -7.1
     m_Colors:
     - _DeepColour: {r: 1, g: 0.65097487, b: 0, a: 1}

@@ -22,6 +22,8 @@ public class AnimalController : MonoBehaviour
     public float yOffset = 1;
     
     public List<GameObject> animalsSpawned = new List<GameObject>();
+    public List<GameObject> dolphinsSpawned = new List<GameObject>();
+    public List<GameObject> whalesSpawned = new List<GameObject>();
     
     public event Action AnnounceAnimalsSpawned;
     
@@ -37,20 +39,20 @@ public class AnimalController : MonoBehaviour
 
         for (int i = 0; i < numberOfDolphins; i++)
         {
-            Spawn(dolphinPrefab, randomLocations[index]);
+            dolphinsSpawned.Add(Spawn(dolphinPrefab, randomLocations[index]));
             index++;
         }
 
         for (int i = 0; i < numberOfWhales; i++)
         {
-            Spawn(whalePrefab, randomLocations[index]);
+            whalesSpawned.Add(Spawn(whalePrefab, randomLocations[index]));
             index++;
         }
         
         AnnounceAnimalsSpawned?.Invoke();
     }
     
-    void Spawn(GameObject prefab, Vector3 pos)
+    GameObject Spawn(GameObject prefab, Vector3 pos)
     {
         Vector3 spawnPos = pos + Vector3.up * yOffset;
 
@@ -62,6 +64,7 @@ public class AnimalController : MonoBehaviour
 
         GameObject spawnedAnimal = Instantiate(prefab, spawnPos, rot);
         animalsSpawned.Add(spawnedAnimal);
+        return  spawnedAnimal;
     }
 
     public void ResetAnimals()
@@ -75,6 +78,8 @@ public class AnimalController : MonoBehaviour
         }
 
         animalsSpawned.Clear();
+        dolphinsSpawned.Clear();
+        whalesSpawned.Clear();
     }
 
 

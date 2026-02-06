@@ -15,7 +15,6 @@ public class OilComponent : MonoBehaviour
         if (isClean) return;
 
         isClean = true;
-        UpdateVisuals();
         AnnounceCleanOrOily?.Invoke(this, isClean);
     }
 

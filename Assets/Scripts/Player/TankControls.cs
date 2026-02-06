@@ -62,6 +62,7 @@ public class TankControls : MonoBehaviour
     void OnEnable()
     {
         Physics.IgnoreLayerCollision(3, 10);
+        Physics.IgnoreLayerCollision(3,8);
         inputHandler.AnnounceMovement += OnMoveInput;
         inputHandler.AnnounceSpaceBar += CameraToggle;
     }

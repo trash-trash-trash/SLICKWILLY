@@ -10,6 +10,7 @@ public class OceanMiddleMan : MonoBehaviour
     public MenuManager menuManager;
     public OceanTracker oceanTracker;
     public OceanGridGenerator oceanGenerator;
+    public GameObject percentObj;
     public TankControls tankControls;
     public Timer timer;
 
@@ -17,9 +18,15 @@ public class OceanMiddleMan : MonoBehaviour
     public TMP_Text timeTaken;
 
     
-    private void Start()
+    private void OnEnable()
     {
+        menuManager.AnnounceGameStarted += StartGame;
         oceanTracker.AnnouncePercentClean += EndGame;
+    }
+
+    private void StartGame()
+    {
+        percentObj.SetActive(true);
     }
 
 
@@ -27,6 +34,7 @@ public class OceanMiddleMan : MonoBehaviour
     {
         if (obj == 100)
         {
+            percentObj.SetActive(false);
             gameOverCanvasObj.SetActive(true);
             
             timer.Stop();

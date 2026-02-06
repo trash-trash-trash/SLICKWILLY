@@ -16,7 +16,7 @@ public class MusicPlayer : MonoBehaviour
 
     public OceanTracker oceanTracker;
 
-    void Start()
+    void OnEnable()
     {
         oceanTracker.AnnouncePercentClean += SetOminous;
         StartSong();
