@@ -657,6 +657,88 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &2398995102867568682
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5837190483007849037}
+    m_Modifications:
+    - target: {fileID: 1057455657745434259, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.002600193
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552459662049673981, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+      propertyPath: m_Name
+      value: MoveWaterParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+--- !u!4 &4124182981492614929 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1762873139714760507, guid: 9ff3872aec6e1b74096115a3812528a3, type: 3}
+  m_PrefabInstance: {fileID: 2398995102867568682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6844152700432094462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -734,6 +816,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1151388028547126963, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6543946892459190688}
+    - targetCorrespondingSourceObject: {fileID: 1151388028547126963, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4124182981492614929}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2cdba52aaeccbe4199674dede882f58, type: 3}
       insertIndex: -1
