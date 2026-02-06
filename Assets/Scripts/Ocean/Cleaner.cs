@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Cleaner : MonoBehaviour
 {
+	public ParticleSystem splashParticles;
+
 	// [SerializeField]
 	// private float radius = 5f;
 	//
@@ -22,10 +24,17 @@ public class Cleaner : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<OilComponent>()!=null)
+	    var colour = splashParticles.colorOverLifetime;
+
+	    if (other.GetComponent<OilComponent>()!=null)
         {
             OilComponent oil = other.GetComponent<OilComponent>();
             oil.Clean();
+            colour.color = new ParticleSystem.MinMaxGradient(Color.black, Color.clear);
+        }
+        else
+        {
+	        colour.color = new ParticleSystem.MinMaxGradient(Color.white, Color.clear);
         }
     }
     //

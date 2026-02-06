@@ -55,8 +55,8 @@ public class OceanGridGenerator : MonoBehaviour
     {
         allOceanTilesOilComponents.Clear();
         
-        for (int i = transform.childCount - 1; i >= 0; i--)
-            Destroy(transform.GetChild(i).gameObject);
+        for (int i = tilesSpawnHere.childCount - 1; i >= 0; i--)
+            Destroy(tilesSpawnHere.GetChild(i).gameObject);
 
         // Random perlin offset
         perlinOffset = new Vector2(
@@ -129,7 +129,7 @@ public class OceanGridGenerator : MonoBehaviour
                         rot = Quaternion.Euler(0f, 90f, 0f);
                     }
 
-                    GameObject barrier = Instantiate(barrierPrefab, pos + offset, rot, transform);
+                    GameObject barrier = Instantiate(barrierPrefab, pos + offset, rot, tilesSpawnHere);
                     barrier.name = $"Barrier_{x}_{z}";
                 }
             }
@@ -143,8 +143,8 @@ public class OceanGridGenerator : MonoBehaviour
         isSpawning = true;
         allOceanTilesOilComponents.Clear();
 
-        for (int i = transform.childCount - 1; i >= 0; i--)
-            Destroy(transform.GetChild(i).gameObject);
+        for (int i = tilesSpawnHere.childCount - 1; i >= 0; i--)
+            Destroy(tilesSpawnHere.GetChild(i).gameObject);
 
         perlinOffset = new Vector2(
             Random.Range(-randomOffsetRange, randomOffsetRange),
@@ -165,7 +165,7 @@ public class OceanGridGenerator : MonoBehaviour
                 float noise = Mathf.PerlinNoise(nx, nz);
 
                 Vector3 pos = new Vector3(x * prefabWidth, 0f, z * prefabWidth);
-                GameObject tile = Instantiate(oceanTilePrefab, pos, Quaternion.identity, transform);
+                GameObject tile = Instantiate(oceanTilePrefab, pos, Quaternion.identity, tilesSpawnHere);
                 tile.name = $"{oceanTilePrefab.name}_{x}_{z}";
 
                 OceanTile oceanTile = tile.GetComponent<OceanTile>();
@@ -207,12 +207,12 @@ public class OceanGridGenerator : MonoBehaviour
                         rot = Quaternion.Euler(0f, 90f, 0f);
                     }
 
-                    GameObject barrier = Instantiate(barrierPrefab, pos + offset, rot, transform);
+                    GameObject barrier = Instantiate(barrierPrefab, pos + offset, rot, tilesSpawnHere);
                     barrier.name = $"Barrier_{x}_{z}";
                 }
 
-                yield return new WaitForEndOfFrame();
             }
+            yield return new WaitForFixedUpdate();
         }
 
         isSpawning = false;

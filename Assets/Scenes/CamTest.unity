@@ -2984,102 +2984,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5673830638328881311, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6341960584194820557, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: m_Name
       value: PlayerBoat
       objectReference: {fileID: 0}
     - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: isMoving
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: canControl
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 1630164245}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: curvePosition
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: currentTopSpeed
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurveScale
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: lateralGripSpeedCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].time
-      value: 0.99731445
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].value
-      value: 0.64559937
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].value
-      value: 0.2325058
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].inSlope
-      value: -0.90799415
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].outSlope
-      value: -0.90799415
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].inWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].outWeight
-      value: 0.05718085
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: lateralGripSpeedCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716385243184181522, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
-      propertyPath: lateralGripSpeedCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8714179786154137041, guid: 85c10d687aaa523459fc0ce7207b8cf1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.1
@@ -5489,8 +5401,8 @@ MonoBehaviour:
   barrierPrefab: {fileID: 0}
   gridWidth: 100
   gridLength: 100
-  oilPercent: 6.43462
-  waterPercent: 93.565384
+  oilPercent: 34.4279
+  waterPercent: 65.5721
   perlinScale: 0.1
   perlinOffset: {x: 0, y: 0}
   randomOffsetRange: 10000

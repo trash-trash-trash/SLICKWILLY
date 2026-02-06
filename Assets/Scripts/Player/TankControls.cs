@@ -201,11 +201,13 @@ public class TankControls : MonoBehaviour
             if (tile != null && tile.oceanType == OceanType.Oil)
             {
                 currentSpeedMultiplier = oilSpeedMultiplier;
-                isOily = true;
+                inOil                  = true;
+                isOily                 = true;
                 break;
             }
             else if(tile != null && tile.oceanType == OceanType.Water)
             {
+	            inOil  = false;
                 isOily = false;
             }
         }
