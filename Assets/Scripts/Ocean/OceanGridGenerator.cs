@@ -13,16 +13,16 @@ public class OceanGridGenerator : MonoBehaviour
 
     [Header("Percentages (must total 100)")] [Range(0, 100)]
     public float oilPercent = 50f;
-
     [Range(0, 100)] public float waterPercent = 50f;
 
     [Header("Perlin Noise")] public float perlinScale = 0.2f;
-
     public Vector2 perlinOffset;
 
     public float randomOffsetRange = 10000f;
 
-    public List<OilComponent> allOceanTilesOilComponents = new List<OilComponent>();
+    public  List<OilComponent> allOceanTilesOilComponents = new List<OilComponent>();
+    [SerializeField]
+    private Transform tilesSpawnHere;
 
     public bool isSpawning = false;
 
@@ -54,7 +54,7 @@ public class OceanGridGenerator : MonoBehaviour
     public void SpawnGrid()
     {
         allOceanTilesOilComponents.Clear();
-
+        
         for (int i = transform.childCount - 1; i >= 0; i--)
             Destroy(transform.GetChild(i).gameObject);
 
@@ -84,7 +84,7 @@ public class OceanGridGenerator : MonoBehaviour
                 //   GameObject prefabToSpawn = (noise < oilThreshold) ? oilPrefab : waterPrefab;
 
                 Vector3 pos = new Vector3(x * prefabWidth, 0f, z * prefabWidth);
-                GameObject tile = Instantiate(oceanTilePrefab, pos, Quaternion.identity, transform);
+                GameObject tile = Instantiate(oceanTilePrefab, pos, Quaternion.identity, tilesSpawnHere);
                 tile.name = $"{oceanTilePrefab.name}_{x}_{z}";
 
                 OceanTile oceanTile = tile.GetComponent<OceanTile>();
@@ -101,7 +101,7 @@ public class OceanGridGenerator : MonoBehaviour
                     oil.Clean();
 
                 allOceanTilesOilComponents.Add(oil);
-
+                
                 bool isEdgeTile =
                     x == 0 || x == gridWidth - 1 ||
                     z == 0 || z == gridLength - 1;

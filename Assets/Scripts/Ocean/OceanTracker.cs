@@ -10,7 +10,9 @@ public class OceanTracker : MonoBehaviour
     public List<OilComponent> cleanTiles = new List<OilComponent>();
     public List<OilComponent> dirtyTiles = new List<OilComponent>();
 
-    [Range(0f, 100f)] public float percentClean = 0f;
+    [Range(0f, 100f)] public float  percentClean = 0f;
+    [SerializeField]
+    private                  RandomAudioPlayer randomAudioPlayer;
 
     public event Action<float> AnnouncePercentClean;
 
@@ -61,7 +63,10 @@ public class OceanTracker : MonoBehaviour
         dirtyTiles.Remove(tile);
 
         if (isCleanNow)
-            cleanTiles.Add(tile);
+        {
+	        cleanTiles.Add(tile);
+	        randomAudioPlayer.PlayRandomClip();
+        }
         else
             dirtyTiles.Add(tile);
 

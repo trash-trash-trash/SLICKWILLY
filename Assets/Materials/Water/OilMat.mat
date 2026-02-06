@@ -21,18 +21,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: OilMat
-  m_Shader: {fileID: -6465566751694194690, guid: 5c133f69ace3ce845acb5cc4853d0988, type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 5c133f69ace3ce845acb5cc4853d0988, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
+  m_Parent: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords:
+  - _FLIPBOOKBLENDING_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
+  - DepthOnly
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -44,6 +48,8 @@ Material:
     - _SpecularSize: 2
     - _WaveAmplitude: 0.1
     m_Colors:
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _DeepColour: {r: 0, g: 0, b: 0, a: 1}
     - _ShallowColour: {r: 0.09803922, g: 0.24313726, b: 0.29803923, a: 1}
     - _SpecularColour: {r: 0, g: 0.078431375, b: 0.1764706, a: 1}

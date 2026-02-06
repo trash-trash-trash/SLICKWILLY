@@ -1,46 +1,37 @@
+using System;
 using UnityEngine;
 
 public class Cleaner : MonoBehaviour
 {
-    [Header("Growth Settings")] 
-    
-    public float initialScale;
-    public float growthMultiplier = 1f;
+	// [SerializeField]
+	// private float radius = 5f;
+	//
+	// private void FixedUpdate()
+	// {
+	// 	Collider[] colliders = new Collider[50];
+	// 	Physics.OverlapSphereNonAlloc(transform.position, radius, colliders);
+	//
+	// 	if (colliders.Length > 0)
+	// 	{
+	// 		for (int i = 0; i < colliders.Length; i++)
+	// 		{
+	// 			colliders[i].GetComponent<OilComponent>()?.Clean();
+	// 		}
+	// 	}
+	// }
 
-    public OceanTracker tracker;
-
-    public Transform targetTransform;
-
-    private void OnEnable()
+	private void OnTriggerEnter(Collider other)
     {
-        initialScale = targetTransform.localScale.x;
-        tracker = FindObjectOfType<OceanTracker>();
-        tracker.AnnouncePercentClean += OnPercentCleanChanged;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<OilComponent>() != null)
+        if (other.GetComponent<OilComponent>()!=null)
         {
             OilComponent oil = other.GetComponent<OilComponent>();
-            if (oil.IsOily)
-            {
-                oil.Clean();
-            }
+            oil.Clean();
         }
     }
-
-    private void OnPercentCleanChanged(float percentClean)
-    {
-        float scaleFactor = initialScale + percentClean * growthMultiplier / 100f;
-        targetTransform.localScale = Vector3.one * scaleFactor;
-        
-        // float scaleFactor = percentClean * growthMultiplier / 100f;
-        // targetTransform.localScale = initialScale * scaleFactor;
-    }
-
-    private void OnDisable()
-    {
-        tracker.AnnouncePercentClean -= OnPercentCleanChanged;
-    }
+    //
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     // Optional: if you want continuous cleaning
+    //     // (ex: cleaning progress per second)
+    // }
 }
