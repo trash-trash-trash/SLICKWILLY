@@ -118,7 +118,6 @@ public class TankControls : MonoBehaviour
 
     private void CheckSurface()
     {
-        isOily = false;
         currentSpeedMultiplier = 1f;
 
         Vector3 center = transform.position + overlapOffset;
@@ -132,6 +131,10 @@ public class TankControls : MonoBehaviour
                 currentSpeedMultiplier = oilSpeedMultiplier;
                 isOily = true;
                 break;
+            }
+            else if(tile != null && tile.oceanType == OceanType.Water)
+            {
+                isOily = false;
             }
         }
     }

@@ -7,6 +7,8 @@ public class TugBoatView : MonoBehaviour
 
     public ParticleSystem splashParticles;
 
+    private bool lastIsOily;
+    
     private void OnEnable()
     {
         model.MovingEvent += MovingEvent;
@@ -25,15 +27,20 @@ public class TugBoatView : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (model.currentSpeedMultiplier == model.oilSpeedMultiplier)
+            return;
+        
+        lastIsOily = model.isOily;
+        
+        var colour = splashParticles.colorOverLifetime;
+        
         if (model.isOily)
         {
-            var splashParticlesColorOverLifetime = splashParticles.colorOverLifetime;
-            splashParticlesColorOverLifetime.color = new ParticleSystem.MinMaxGradient(Color.black, Color.clear);
+            colour.color = new ParticleSystem.MinMaxGradient(Color.black, Color.clear);
         }
         else
         {
-            var splashParticlesColorOverLifetime = splashParticles.colorOverLifetime;
-            splashParticlesColorOverLifetime.color = new ParticleSystem.MinMaxGradient(Color.white, Color.clear);
+            colour.color = new ParticleSystem.MinMaxGradient(Color.white, Color.clear);
         }
     }
 }
