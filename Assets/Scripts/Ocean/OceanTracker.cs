@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OceanTracker : MonoBehaviour
 {
-    public AnimalController animalController;
     public OceanGridGenerator generator;
 
     public List<OilComponent> totalTiles = new List<OilComponent>();
@@ -74,14 +73,14 @@ public class OceanTracker : MonoBehaviour
         percentClean = (cleanTiles.Count / (float)totalTiles.Count) * 100f;
 
         AnnouncePercentClean?.Invoke(percentClean);
-
-        if (percentClean == 100)
-            EndGame();
     }
 
-    void EndGame()
+    public void InstantClean()
     {
-        
+        foreach (OilComponent oil in totalTiles)
+        {
+            oil.Clean();
+        }
     }
 
     private void OnDisable()
