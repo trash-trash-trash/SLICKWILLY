@@ -13,6 +13,8 @@ public class PulseImage : MonoBehaviour
     private List<Vector3> baseScales = new List<Vector3>();
     private List<Vector3> maxScales = new List<Vector3>();
 
+    public AudioSource audio;
+
     void OnEnable()
     {
         baseScales.Clear();
@@ -25,6 +27,11 @@ public class PulseImage : MonoBehaviour
         }
 
         StartCoroutine(Pulse());
+
+        if (audio)
+        {
+            audio.Play();
+        }
     }
 
     IEnumerator Pulse()
@@ -61,5 +68,9 @@ public class PulseImage : MonoBehaviour
     void OnDisable()
     {
         StopAllCoroutines();
+        if(audio)
+        {
+            audio.Stop();
+        }
     }
 }
