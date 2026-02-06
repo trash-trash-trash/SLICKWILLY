@@ -13,7 +13,7 @@ public class PulseImage : MonoBehaviour
     private List<Vector3> baseScales = new List<Vector3>();
     private List<Vector3> maxScales = new List<Vector3>();
 
-    void Start()
+    void OnEnable()
     {
         baseScales.Clear();
         maxScales.Clear();
@@ -56,5 +56,10 @@ public class PulseImage : MonoBehaviour
         {
             rects[i].localScale = toList[i];
         }
+    }
+    
+    void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }

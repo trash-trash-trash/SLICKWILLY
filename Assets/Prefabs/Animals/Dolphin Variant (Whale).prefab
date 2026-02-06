@@ -1024,6 +1024,10 @@ PrefabInstance:
       propertyPath: wallBounceForce
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 4635362020366132597, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
+      propertyPath: wallDetectRadius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6959481609334283564, guid: c54f41a1865e468408c7a1deaac8aeb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9038845382476767538}
   - component: {fileID: 451456385771976219}
   m_Layer: 7
-  m_Name: Oil
+  m_Name: OceanTilePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,3 +141,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OceanTile
   oceanType: 1
   renderer: {fileID: 1081922161833978305}
+  oilComponent: {fileID: 9038845382476767538}

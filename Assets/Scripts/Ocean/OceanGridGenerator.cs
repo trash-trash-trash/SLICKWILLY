@@ -5,8 +5,7 @@ using Random = UnityEngine.Random;
 
 public class OceanGridGenerator : MonoBehaviour
 {
-    [Header("Prefabs")] public GameObject waterPrefab;
-    public GameObject oilPrefab;
+    [Header("Prefabs")] public GameObject oceanTilePrefab;
     public GameObject barrierPrefab;
 
     [Header("Grid Settings")] public int gridWidth = 10;
@@ -14,15 +13,18 @@ public class OceanGridGenerator : MonoBehaviour
 
     [Header("Percentages (must total 100)")] [Range(0, 100)]
     public float oilPercent = 50f;
+
     [Range(0, 100)] public float waterPercent = 50f;
 
     [Header("Perlin Noise")] public float perlinScale = 0.2f;
-    
+
     public Vector2 perlinOffset;
 
     public float randomOffsetRange = 10000f;
 
     public List<OilComponent> allOceanTilesOilComponents = new List<OilComponent>();
+
+    public bool isSpawning = false;
 
     public event Action AnnounceOceanGenerated;
 
@@ -43,14 +45,16 @@ public class OceanGridGenerator : MonoBehaviour
 
     private void Start()
     {
-        SpawnGrid();
+        // SpawnGrid();
+
+        StartCoroutine(SpawnGridSequence());
     }
 
 
     public void SpawnGrid()
     {
         allOceanTilesOilComponents.Clear();
-        
+
         for (int i = transform.childCount - 1; i >= 0; i--)
             Destroy(transform.GetChild(i).gameObject);
 
@@ -66,7 +70,7 @@ public class OceanGridGenerator : MonoBehaviour
         float oilThreshold = oilPercent / 100f;
 
         // Get prefab size from localScale (assumes cube is uniform in X/Z)
-        float prefabWidth = waterPrefab.transform.localScale.x;
+        float prefabWidth = oceanTilePrefab.transform.localScale.x;
 
         for (int x = 0; x < gridWidth; x++)
         {
@@ -77,18 +81,18 @@ public class OceanGridGenerator : MonoBehaviour
 
                 float noise = Mathf.PerlinNoise(nx, nz);
 
-                GameObject prefabToSpawn = (noise < oilThreshold) ? oilPrefab : waterPrefab;
+                //   GameObject prefabToSpawn = (noise < oilThreshold) ? oilPrefab : waterPrefab;
 
                 Vector3 pos = new Vector3(x * prefabWidth, 0f, z * prefabWidth);
-                GameObject tile = Instantiate(prefabToSpawn, pos, Quaternion.identity, transform);
-                tile.name = $"{prefabToSpawn.name}_{x}_{z}";
+                GameObject tile = Instantiate(oceanTilePrefab, pos, Quaternion.identity, transform);
+                tile.name = $"{oceanTilePrefab.name}_{x}_{z}";
 
                 OceanTile oceanTile = tile.GetComponent<OceanTile>();
                 oceanTile.oceanType = (noise < oilThreshold) ? OceanType.Oil : OceanType.Water;
 
                 OilComponent oil = tile.GetComponent<OilComponent>();
 
-                oil.AnnounceCleanOrOily += (oilComp, isClean) => oceanTile.CleanDirty(isClean);
+                oil.AnnounceCleanOrOily += (oilComp, isClean) => oceanTile.CleanDirty(oil, isClean);
 
                 if
                     (noise < oilThreshold)
@@ -97,7 +101,7 @@ public class OceanGridGenerator : MonoBehaviour
                     oil.Clean();
 
                 allOceanTilesOilComponents.Add(oil);
-                
+
                 bool isEdgeTile =
                     x == 0 || x == gridWidth - 1 ||
                     z == 0 || z == gridLength - 1;
@@ -111,17 +115,95 @@ public class OceanGridGenerator : MonoBehaviour
 
                     // push outward depending on which edge we're on
                     if (x == 0)
-                        offset = new Vector3(-half, 0f, 0f);          // left wall
+                        offset = new Vector3(-half, 0f, 0f); // left wall
                     else if (x == gridWidth - 1)
-                        offset = new Vector3(+half, 0f, 0f);          // right wall
+                        offset = new Vector3(+half, 0f, 0f); // right wall
                     else if (z == 0)
                     {
-                        offset = new Vector3(0f, 0f, -half);          // bottom wall
+                        offset = new Vector3(0f, 0f, -half); // bottom wall
                         rot = Quaternion.Euler(0f, 90f, 0f);
                     }
                     else if (z == gridLength - 1)
                     {
-                        offset = new Vector3(0f, 0f, +half);          // top wall
+                        offset = new Vector3(0f, 0f, +half); // top wall
+                        rot = Quaternion.Euler(0f, 90f, 0f);
+                    }
+
+                    GameObject barrier = Instantiate(barrierPrefab, pos + offset, rot, transform);
+                    barrier.name = $"Barrier_{x}_{z}";
+                }
+            }
+        }
+
+        AnnounceOceanGenerated?.Invoke();
+    }
+
+    public System.Collections.IEnumerator SpawnGridSequence()
+    {
+        isSpawning = true;
+        allOceanTilesOilComponents.Clear();
+
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            Destroy(transform.GetChild(i).gameObject);
+
+        perlinOffset = new Vector2(
+            Random.Range(-randomOffsetRange, randomOffsetRange),
+            Random.Range(-randomOffsetRange, randomOffsetRange)
+        );
+
+        perlinScale = Random.Range(0.035f, 0.075f);
+
+        float oilThreshold = oilPercent / 100f;
+        float prefabWidth = oceanTilePrefab.transform.localScale.x;
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int z = 0; z < gridLength; z++)
+            {
+                float nx = (x * perlinScale) + perlinOffset.x;
+                float nz = (z * perlinScale) + perlinOffset.y;
+                float noise = Mathf.PerlinNoise(nx, nz);
+
+                Vector3 pos = new Vector3(x * prefabWidth, 0f, z * prefabWidth);
+                GameObject tile = Instantiate(oceanTilePrefab, pos, Quaternion.identity, transform);
+                tile.name = $"{oceanTilePrefab.name}_{x}_{z}";
+
+                OceanTile oceanTile = tile.GetComponent<OceanTile>();
+                oceanTile.oceanType = (noise < oilThreshold) ? OceanType.Oil : OceanType.Water;
+
+                OilComponent oil = tile.GetComponent<OilComponent>();
+                oil.AnnounceCleanOrOily += (oilComp, isClean) => oceanTile.CleanDirty(oil, isClean);
+
+                if (noise < oilThreshold)
+                    oil.Dirty();
+                else
+                    oil.Clean();
+
+                allOceanTilesOilComponents.Add(oil);
+
+                bool isEdgeTile =
+                    x == 0 || x == gridWidth - 1 ||
+                    z == 0 || z == gridLength - 1;
+
+                if (isEdgeTile && barrierPrefab != null)
+                {
+                    float half = prefabWidth * 0.5f;
+
+                    Vector3 offset = Vector3.zero;
+                    Quaternion rot = Quaternion.identity;
+
+                    if (x == 0)
+                        offset = new Vector3(-half, 0f, 0f);
+                    else if (x == gridWidth - 1)
+                        offset = new Vector3(+half, 0f, 0f);
+                    else if (z == 0)
+                    {
+                        offset = new Vector3(0f, 0f, -half);
+                        rot = Quaternion.Euler(0f, 90f, 0f);
+                    }
+                    else if (z == gridLength - 1)
+                    {
+                        offset = new Vector3(0f, 0f, +half);
                         rot = Quaternion.Euler(0f, 90f, 0f);
                     }
 
@@ -129,9 +211,11 @@ public class OceanGridGenerator : MonoBehaviour
                     barrier.name = $"Barrier_{x}_{z}";
                 }
 
+                yield return new WaitForEndOfFrame();
             }
         }
 
+        isSpawning = false;
         AnnounceOceanGenerated?.Invoke();
     }
 }

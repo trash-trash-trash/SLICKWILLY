@@ -5,36 +5,35 @@ public class OceanTile : MonoBehaviour
 {
     public OceanType oceanType = OceanType.Water;
     
-    private bool cleanWater = false;
     public Renderer renderer;
 
-    //probably needs an ID?
-    public event Action<OceanTile> AnnounceCleaned;
-    
-    public bool CleanWater
-    {
-        get => cleanWater;
-        private set => cleanWater = value;
-    }
+    public OilComponent oilComponent;
 
-    public void Clean()
+    void OnEnable()
     {
-        CleanWater = true;
-        AnnounceCleaned?.Invoke(this);
+        oilComponent.AnnounceCleanOrOily += CleanDirty;
+        
+        CleanDirty(oilComponent, true);
     }
     
-    
-    public void CleanDirty(bool clean)
+    public void CleanDirty(OilComponent component, bool b)
     {
-        if(clean)
+        if(b)
         {
-            renderer.enabled = false;
             oceanType = OceanType.Water;
+            renderer.enabled = false;
+            gameObject.name = "Water";
         }
         else
         {
             renderer.enabled = true;
             oceanType = OceanType.Oil;
+            gameObject.name = "Oil";
         }
+    }
+
+    void OnDisable()
+    {
+        oilComponent.AnnounceCleanOrOily -= CleanDirty;
     }
 }

@@ -183,27 +183,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d7659cbe549dd4cbda5000903c25c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DolphinModel
+  oilComponent: {fileID: 1512553837396724660}
   rb: {fileID: 2811062637919771854}
-  speed: 200
-  maxspeed: 85
+  forwardForce: 15
+  maxSpeed: 8
   turnSpeed: 360
-  turnAngleRange: 45
-  oceanTileLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  escapeForceBoost: 20
+  wobbleStrength: 20
+  wobbleFrequency: 0.5
   invisibleWallLayer:
     serializedVersion: 2
     m_Bits: 256
-  animalLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  oilComponent: {fileID: 1512553837396724660}
-  wallBounceForce: 1000
-  wallPauseTime: 1
+  wallDetectRadius: 10
+  escapeRayDistance: 25
+  escapeRayAttempts: 25
   wallRepelForce: 200
+  wallRepelFalloff: 1
+  oceanTileLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &2811062637919771854
 Rigidbody:
   m_ObjectHideFlags: 0

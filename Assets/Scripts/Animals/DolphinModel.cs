@@ -1,109 +1,152 @@
-using System;
 using UnityEngine;
 
 public class DolphinModel : MonoBehaviour
 {
-    public Rigidbody rb;
+    public OilComponent oilComponent;
 
-    public float speed;
-    public float maxspeed;
+    [Header("Physics")] public Rigidbody rb;
+    public float forwardForce = 15f;
+    public float maxSpeed = 8f;
+    public float turnSpeed = 4f;
+    public float escapeForceBoost = 20f;
 
-    public float turnSpeed = 360f;
-    public float turnAngleRange = 45f;
-        
-    private bool isTurning = false;
-    private Quaternion targetRotation;
+    [Header("Wobble")] public float wobbleStrength = 20f;
+    public float wobbleFrequency = 0.5f;
+    private float wobbleSeed;
+
+    [Header("Wall Avoidance")] public LayerMask invisibleWallLayer;
+    public float wallDetectRadius = 10f;
+    public float escapeRayDistance = 25f;
+    public int escapeRayAttempts = 25;
+
+    public float wallRepelForce = 30f;
+    public float wallRepelFalloff = 1f;
+
+    private bool escaping = false;
+    private Vector3 escapeDirection;
 
     public LayerMask oceanTileLayer;
-    public LayerMask invisibleWallLayer;
-    
-    public OilComponent oilComponent;
-    
-    [Header("Wall Hit Response")]
-    public float wallBounceForce = 2f;
-    public float wallPauseTime = 0.15f;
-    private bool isStunned = false;
-    
-    public float wallRepelForce = 100f; // force applied while inside wall
 
-    void OnEnable()
+    private Collider[] wallHits = new Collider[8];
+
+    void Awake()
     {
-        Physics.IgnoreLayerCollision(9, 9);
-        Physics.IgnoreLayerCollision(9, 3);
-        oilComponent.Dirty();
+        oilComponent = GetComponent<OilComponent>();
+        wobbleSeed = Random.Range(0f, 1000f);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (isStunned)
-            return;
-        
-        if (!isTurning)
-            MoveForwards();
+        LimitSpeed();
+
+        if (DetectWall())
+        {
+            HandleEscape();
+        }
         else
-            TurnTowardsTarget();
-    }
-
-    void MoveForwards()
-    {
-        rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Acceleration);
-
-        if (rb.linearVelocity.magnitude > maxspeed)
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxspeed;
+            SwimForward();
         }
     }
 
-    void TurnTowardsTarget()
-    {
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRotation,
-            turnSpeed * Time.deltaTime
-        );
 
-        if (Quaternion.Angle(transform.rotation, targetRotation) < 0.5f)
+    void SwimForward()
+    {
+        escaping = false;
+
+        rb.AddForce(transform.forward * forwardForce, ForceMode.Acceleration);
+
+        float noise = Mathf.PerlinNoise(Time.time * wobbleFrequency, wobbleSeed);
+        float steer = (noise - 0.5f) * 2f * wobbleStrength;
+
+        rb.AddTorque(Vector3.up * steer, ForceMode.Acceleration);
+    }
+
+    void LimitSpeed()
+    {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (flatVel.magnitude > maxSpeed)
         {
-            isTurning = false;
+            rb.linearVelocity = flatVel.normalized * maxSpeed + Vector3.up * rb.linearVelocity.y;
         }
     }
 
-    //when dolphin hits barrier, spin 180 degrees to turn around, then random between -turnAngleRange
-    void StartTurnAround(Vector3 wallNormal)
+
+    bool DetectWall()
     {
-        // Push slightly away from wall
-        rb.AddForce(-wallNormal * wallBounceForce, ForceMode.VelocityChange);
-
-        // Begin turn
-        float randomOffset = UnityEngine.Random.Range(-turnAngleRange, turnAngleRange);
-        float turnAmount = 180f + randomOffset;
-
-        targetRotation = Quaternion.Euler(
-            0f,
-            transform.eulerAngles.y + turnAmount,
-            0f
+        int count = Physics.OverlapSphereNonAlloc(
+            transform.position,
+            wallDetectRadius,
+            wallHits,
+            invisibleWallLayer
         );
 
-        isTurning = true;
+        if (count > 0)
+        {
+            ApplyWallRepulsion(count);
+            return true;
+        }
 
-        StartCoroutine(WallPause());
+        return false;
     }
 
-    System.Collections.IEnumerator WallPause()
+
+    void ApplyWallRepulsion(int count)
     {
-        isStunned = true;
-        yield return new WaitForSeconds(wallPauseTime);
-        isStunned = false;
+        for (int i = 0; i < count; i++)
+        {
+            Collider col = wallHits[i];
+            if (col == null) continue;
+
+            Vector3 closest = col.ClosestPoint(transform.position);
+            Vector3 away = transform.position - closest;
+
+            float dist = away.magnitude;
+            if (dist < 0.001f) continue;
+
+            float strength = 1f - Mathf.Clamp01(dist / wallDetectRadius);
+            Vector3 force = away.normalized * wallRepelForce * strength * wallRepelFalloff;
+
+            rb.AddForce(force, ForceMode.Acceleration);
+        }
     }
-    
+
+
+    void HandleEscape()
+    {
+        if (!escaping)
+        {
+            escaping = true;
+            escapeDirection = FindEscapeDirection();
+            rb.AddForce(escapeDirection * escapeForceBoost, ForceMode.VelocityChange);
+        }
+
+        Quaternion targetRot = Quaternion.LookRotation(escapeDirection, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnSpeed * Time.fixedDeltaTime);
+    }
+
+    Vector3 FindEscapeDirection()
+    {
+        Vector3 backward = -transform.forward;
+
+        for (int i = 0; i < escapeRayAttempts; i++)
+        {
+            float angle = Random.Range(-90f, 90f);
+            Vector3 dir = Quaternion.Euler(0f, angle, 0f) * backward;
+
+            if (!Physics.Raycast(transform.position, dir, escapeRayDistance, invisibleWallLayer))
+            {
+                return dir.normalized;
+            }
+        }
+
+        //worst case: full reverse
+        return backward.normalized;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & invisibleWallLayer.value) != 0)
-        { 
-            Vector3 wallNormal = (transform.position - other.ClosestPoint(transform.position)).normalized;
-            StartTurnAround(wallNormal);
-        }
-        else if(((1 << other.gameObject.layer) & oceanTileLayer.value) != 0)
+        if (((1 << other.gameObject.layer) & oceanTileLayer.value) != 0)
         {
             Debug.Log("hit ocean tile");
             if (oilComponent.IsOily)
@@ -119,13 +162,12 @@ public class DolphinModel : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnDrawGizmosSelected()
     {
-        if (((1 << other.gameObject.layer) & invisibleWallLayer.value) != 0)
-        {
-            // Push away from wall
-            Vector3 repelDir = (transform.position - other.ClosestPoint(transform.position)).normalized;
-            rb.AddForce(repelDir * wallRepelForce, ForceMode.Acceleration);
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, wallDetectRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3f);
     }
 }
