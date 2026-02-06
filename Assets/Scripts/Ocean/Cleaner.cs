@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Cleaner : MonoBehaviour
 {
-    [Header("Growth Settings")] public float initialScale = 1f;
+    [Header("Growth Settings")] 
+    
+    public Vector3 initialScale;
     public float growthMultiplier = 1f;
 
     public OceanTracker tracker;
@@ -11,7 +13,7 @@ public class Cleaner : MonoBehaviour
 
     private void OnEnable()
     {
-        initialScale = targetTransform.localScale.x;
+        initialScale = targetTransform.localScale;
         tracker = FindObjectOfType<OceanTracker>();
         tracker.AnnouncePercentClean += OnPercentCleanChanged;
     }
@@ -30,9 +32,9 @@ public class Cleaner : MonoBehaviour
 
     private void OnPercentCleanChanged(float percentClean)
     {
-        //scale = initial + percentClean * multiplier
-        float scaleFactor = initialScale + percentClean * growthMultiplier / 100f;
-        targetTransform.localScale = Vector3.one * scaleFactor;
+        
+        float scaleFactor = percentClean * growthMultiplier / 100f;
+        targetTransform.localScale = initialScale * scaleFactor;
     }
 
     private void OnDisable()
