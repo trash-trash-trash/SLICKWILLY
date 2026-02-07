@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7a7a2802e890188449ae240b3a769c6a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cleaner
   splashParticles: {fileID: 0}
+  tilesCleanedTotal: 0
+  currentCombo: 0
+  biggestCombo: 0
+  comboGainedInTheLastFiveFrames: 0
+  comboTimer: 5
+  oilCleaned: []
+  active: 0
 --- !u!1 &436009691368302565
 GameObject:
   m_ObjectHideFlags: 0
@@ -6121,6 +6128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4475d69fea20a54695d8cd77e2a44a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankControls
+  cleaner: {fileID: 1342548681918469700}
   inputHandler: {fileID: 0}
   rb: {fileID: 567556954471655591}
   accelerationForce: 1000
@@ -6705,7 +6713,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d833e9e7cb380d4408ed4a26b13ac975, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

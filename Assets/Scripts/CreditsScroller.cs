@@ -7,7 +7,7 @@ public class CreditsScroller : MonoBehaviour
     public float scrollSpeed = 50f;
 
     private RectTransform textRect;
-    private float textWidth=2178;
+    private float textWidth=2198;
     private float startX;
 
     void OnEnable()

@@ -29,6 +29,8 @@ public class DolphinModel : MonoBehaviour
 
     private Collider[] wallHits = new Collider[8];
 
+    public bool canMove = true;
+
     void Awake()
     {
         oilComponent = GetComponent<OilComponent>();
@@ -38,16 +40,26 @@ public class DolphinModel : MonoBehaviour
 
     void FixedUpdate()
     {
-        LimitSpeed();
+        if(canMove)
+        {
+            LimitSpeed();
 
-        if (DetectWall())
-        {
-            HandleEscape();
+            if (DetectWall())
+            {
+                HandleEscape();
+            }
+            else
+            {
+                SwimForward();
+            }
         }
-        else
-        {
-            SwimForward();
-        }
+    }
+
+    public void FlipCanMove(bool input)
+    {
+        canMove = input;
+        
+        oilComponent.FlipCanBeCleaned(input);
     }
 
 

@@ -10,12 +10,16 @@ public class AnimalController : MonoBehaviour
 
     public int numberOfDolphins=4;
     public int numberOfWhales=1;
+    public int numberOfFrozen = 1;
+    public int numberOfBuoys = 1;
 
     public List<Vector3> allPositions = new List<Vector3>();
     public List<Vector3> randomLocations = new List<Vector3>();
 
     public GameObject dolphinPrefab;
     public GameObject whalePrefab;
+    public GameObject icebergPrefab;
+    public GameObject bouyPrefab;
     
     public float minDolphinSpacing = 3f;
     public int maxTriesPerDolphin = 20;
@@ -24,6 +28,8 @@ public class AnimalController : MonoBehaviour
     public List<GameObject> animalsSpawned = new List<GameObject>();
     public List<GameObject> dolphinsSpawned = new List<GameObject>();
     public List<GameObject> whalesSpawned = new List<GameObject>();
+    public List<GameObject> bouyesSpawned = new List<GameObject>();
+    public List<GameObject> frozenSpawned = new List<GameObject>();
     
     public event Action AnnounceAnimalsSpawned;
     
@@ -48,6 +54,31 @@ public class AnimalController : MonoBehaviour
             whalesSpawned.Add(Spawn(whalePrefab, randomLocations[index]));
             index++;
         }
+        
+        for (int i = 0; i < numberOfFrozen; i++)
+        {
+            GameObject frozenDolphin = Spawn(dolphinPrefab, randomLocations[index]);
+            dolphinsSpawned.Add(frozenDolphin);
+            
+            DolphinModel dolphin = frozenDolphin.GetComponent<DolphinModel>();
+            dolphin.FlipCanMove(false);
+
+            GameObject newIceberg = Spawn(icebergPrefab, randomLocations[index]);
+            frozenSpawned.Add(newIceberg);
+            
+            FrozenAnimal frozo = newIceberg.GetComponent<FrozenAnimal>();
+            frozo.dolphin = dolphin;
+            frozo.Shrink();
+            
+            index++;
+        }
+
+        for (int i = 0; i < numberOfBuoys; i++)
+        {
+            bouyesSpawned.Add(Spawn(bouyPrefab, randomLocations[index]));
+            index++;
+        }
+
         
         AnnounceAnimalsSpawned?.Invoke();
     }
@@ -95,7 +126,7 @@ public class AnimalController : MonoBehaviour
 
         if (allPositions.Count == 0) return;
         
-        for (int i = 0; i < numberOfDolphins + numberOfWhales; i++)
+        for (int i = 0; i < numberOfDolphins + numberOfWhales + numberOfBuoys + numberOfFrozen; i++)
         {
             bool foundSpot = false;
 

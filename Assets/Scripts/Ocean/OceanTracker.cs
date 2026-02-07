@@ -10,15 +10,21 @@ public class OceanTracker : MonoBehaviour
     public List<OilComponent> cleanTiles = new List<OilComponent>();
     public List<OilComponent> dirtyTiles = new List<OilComponent>();
 
-    [Range(0f, 100f)] public float  percentClean = 0f;
-    [SerializeField]
-    private                  RandomAudioPlayer randomAudioPlayer;
+    [Range(0f, 100f)] public float percentClean = 0f;
+    [SerializeField] private RandomAudioPlayer randomAudioPlayer;
 
     public event Action<float> AnnouncePercentClean;
+
+    public bool gameStarted = false;
 
     private void OnEnable()
     {
         generator.AnnounceOceanGenerated += OnOceanGenerated;
+    }
+
+    public void FlipGameStarted(bool input)
+    {
+        gameStarted = input;
     }
 
     private void OnOceanGenerated()
@@ -46,7 +52,7 @@ public class OceanTracker : MonoBehaviour
             oil.AnnounceCleanOrOily += OnTileCleanStateChanged;
         }
 
-        RecalculatePercentClean();
+            RecalculatePercentClean();
     }
 
     private void UnsubscribeAll()
@@ -64,20 +70,21 @@ public class OceanTracker : MonoBehaviour
 
         if (isCleanNow)
         {
-	        cleanTiles.Add(tile);
-	        randomAudioPlayer.PlayRandomClip();
+            cleanTiles.Add(tile);
+            randomAudioPlayer.PlayRandomClip();
         }
         else
             dirtyTiles.Add(tile);
 
-        RecalculatePercentClean();
+            RecalculatePercentClean();
     }
 
     private void RecalculatePercentClean()
     {
         percentClean = (cleanTiles.Count / (float)totalTiles.Count) * 100f;
 
-        AnnouncePercentClean?.Invoke(percentClean);
+        if (gameStarted)
+            AnnouncePercentClean?.Invoke(percentClean);
     }
 
     public void InstantClean()

@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
     public GameObject uiMainMenu;
     public GameObject howToPlayObject;
     public GameObject setupGameMenu;
-    public GameObject percentCleanObj;
+    public GameObject skinPickerObject;
     
     public TankControls tankControls;
     public CameraManager cameraManager;
@@ -30,6 +30,7 @@ public class MenuManager : MonoBehaviour
         sampleScene.SetActive(false);
         uiMainMenu.SetActive(false);
         setupGameMenu.SetActive(true);
+        skinPickerObject.SetActive(true);
     }
 
     public void HowToPlay()
@@ -47,9 +48,9 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         cameraManager.RunGame();
-        percentCleanObj.SetActive(true);
         setupGameMenu.SetActive(false);
         tankControls.FlipControlOnOff(true);
+        skinPickerObject.SetActive(false);
         AnnounceGameStarted?.Invoke();
     }
 

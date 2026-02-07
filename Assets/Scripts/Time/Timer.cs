@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
     public bool aNewRecord = false;
     
     public GameObject pauseCanvasObj;
+    public GameObject skinPickerObject;
 
     void Start()
     {
@@ -71,6 +72,7 @@ public class Timer : MonoBehaviour
     public void Resume()
     {
         pauseCanvasObj.SetActive(false);
+        skinPickerObject.SetActive(false);
         TimeIsRunning = true;
         Time.timeScale = 1f;
     }
@@ -78,6 +80,7 @@ public class Timer : MonoBehaviour
     public void Pause()
     {
         pauseCanvasObj.SetActive(true);
+        skinPickerObject.SetActive(true);
         TimeIsRunning = false;
         Time.timeScale = 0f; 
     }

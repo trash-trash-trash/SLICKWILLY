@@ -6,8 +6,6 @@ using Random = System.Random;
 public class VoiceLinePlayer : MonoBehaviour
 {
     public AnimalController animalController;
-    
-    public List<AudioClip> comboSounds =  new List<AudioClip>();
     //how to listen to individual animal identifiers
     public List<AudioClip> dolphinVoicelines =  new List<AudioClip>();
     public List<AudioClip> whaleVoicelines =  new List<AudioClip>();
@@ -18,7 +16,8 @@ public class VoiceLinePlayer : MonoBehaviour
     {
         animalController.AnnounceAnimalsSpawned += SubToAnimalsList;
     }
-
+    
+    //TODO: FIX
     private void SubToAnimalsList()
     {
         foreach (GameObject dolphinObj in animalController.dolphinsSpawned)
@@ -34,7 +33,7 @@ public class VoiceLinePlayer : MonoBehaviour
         }
     }
     
-    private void UnSubToAnimalsList()
+    public void UnSubToAnimalsList()
     {
         foreach (GameObject dolphinObj in animalController.dolphinsSpawned)
         {
@@ -57,6 +56,8 @@ public class VoiceLinePlayer : MonoBehaviour
         if (arg2)
         {
             PlayRandomAnimalVoiceLine(0);
+            
+            arg1.AnnounceCleanOrOily -= AttemptDolphin;
         }
     }
    private void AttemptWhale(OilComponent arg1, bool arg2)
@@ -64,40 +65,37 @@ public class VoiceLinePlayer : MonoBehaviour
         if (arg2)
         {
             PlayRandomAnimalVoiceLine(1);
+            arg1.AnnounceCleanOrOily -= AttemptWhale;
         }
     }
 
     private void PlayRandomAnimalVoiceLine(int obj)
     {
-        Debug.Log("Attempting Voice Line");
-        // 50% chance to play at all
-        int random = UnityEngine.Random.Range(0,1);
-        if (random > 0.5f)
-        {
-            Debug.Log("Failed Voice Line");
-            return;
-        }
         
-        Debug.Log("Completed Voice Line");
-
         List<AudioClip> chosenList = null;
 
         if (obj == 0)
+        {
+            Debug.Log("Attempting Voice Line");
+            // 50% chance to play at all
+            int random = UnityEngine.Random.Range(0,1);
+            if (random > 0.5f)
+            {
+                Debug.Log("Failed Voice Line");
+                return;
+            }
+        
+            Debug.Log("Completed Voice Line");
+            
             chosenList = dolphinVoicelines;
+        }
+        
         else if (obj == 1)
             chosenList = whaleVoicelines;
 
-        if (chosenList == null || chosenList.Count == 0) return;
-
-        AudioClip clipToPlay = comboSounds[UnityEngine.Random.Range(0, chosenList.Count)];
+        AudioClip clipToPlay = chosenList[UnityEngine.Random.Range(0, chosenList.Count)];
         
         source.PlayOneShot(clipToPlay);
-    }
-    
-    public void PlayRandomComboSound()
-    {
-        source.clip = comboSounds[UnityEngine.Random.Range(0, comboSounds.Count)];
-        source.Play();
     }
 
     void OnDisable()

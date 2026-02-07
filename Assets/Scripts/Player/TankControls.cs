@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TankControls : MonoBehaviour
 {
+	public Cleaner cleaner;
     public PlayerInputHandler inputHandler;
     public Rigidbody rb;
 
@@ -70,6 +71,8 @@ public class TankControls : MonoBehaviour
     public void FlipControlOnOff(bool input)
     {
         canControl = input;
+
+        cleaner.active = input;
     }
 
     private void CameraToggle(bool obj)
