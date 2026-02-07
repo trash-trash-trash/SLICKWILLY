@@ -7,14 +7,14 @@ public class OceanTrackerView : MonoBehaviour
     
     public TMP_Text percentText;
 
-    void Start()
+    void OnEnable()
     {
         oceanTracker.AnnouncePercentClean += SetPercentText;
     }
 
     private void SetPercentText(float obj)
     {
-        percentText.text = obj.ToString()+"%";
+        percentText.text = obj.ToString("F2") + "%";
     }
 
     void OnDisable()

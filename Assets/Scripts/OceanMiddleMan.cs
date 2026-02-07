@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using NUnit.Framework.Constraints;
 using TMPro;
 using UnityEngine;
@@ -51,8 +52,15 @@ public class OceanMiddleMan : MonoBehaviour
         comboObj.SetActive(true);
         oceanTracker.FlipGameStarted(false);
         musicPlayer.ResetOminousBaseline(oceanGenerator.waterPercent);
+
+        StartCoroutine(TraditionalHackWait());
     }
 
+    IEnumerator TraditionalHackWait()
+    {
+        yield return new WaitForFixedUpdate();
+        oceanTracker.FlipGameStarted(true);
+    }
 
     private void EndGame(float obj)
     {

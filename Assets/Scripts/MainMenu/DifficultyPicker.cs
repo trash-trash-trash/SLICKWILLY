@@ -43,7 +43,7 @@ public class DifficultyPicker : MonoBehaviour
                 oceanGenerator.oilPercent = 10f;
                 animalController.numberOfDolphins = 3;
                 animalController.numberOfWhales = 1;
-                animalController.numberOfFrozen = 1;
+                animalController.numberOfFrozen = 2;
                 animalController.numberOfBuoys = 1;
                 break;
 
@@ -52,7 +52,7 @@ public class DifficultyPicker : MonoBehaviour
                 
                 animalController.numberOfDolphins = 4;
                 animalController.numberOfWhales = 1;
-                animalController.numberOfFrozen = 2;
+                animalController.numberOfFrozen = 3;
                 animalController.numberOfBuoys = 3;
                 break;
 
@@ -61,7 +61,7 @@ public class DifficultyPicker : MonoBehaviour
                 
                 animalController.numberOfDolphins = 5;
                 animalController.numberOfWhales = 2;
-                animalController.numberOfFrozen = 3;
+                animalController.numberOfFrozen = 4;
                 animalController.numberOfBuoys = 5;
                 break;
         }

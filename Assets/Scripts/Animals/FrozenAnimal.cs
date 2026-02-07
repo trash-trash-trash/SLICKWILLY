@@ -18,7 +18,7 @@ public class FrozenAnimal : MonoBehaviour
 
     IEnumerator ShrinkCoroutine()
     {
-        float duration = Random.Range(30f, 66f);
+        float duration = Random.Range(30f, 166f);
 
         Transform t = gameObject.transform;
         Vector3 startScale = t.localScale;
