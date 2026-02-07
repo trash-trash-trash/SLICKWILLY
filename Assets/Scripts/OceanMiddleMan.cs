@@ -12,6 +12,7 @@ public class OceanMiddleMan : MonoBehaviour
     public DifficultyPicker difficultyPicker;
     public GameObject gameOverCanvasObj;
     public MenuManager menuManager;
+    public MusicPlayer musicPlayer;
     public OceanTracker oceanTracker;
     public OceanGridGenerator oceanGenerator;
     public GameObject percentObj;
@@ -49,6 +50,7 @@ public class OceanMiddleMan : MonoBehaviour
         percentObj.SetActive(true);
         comboObj.SetActive(true);
         oceanTracker.FlipGameStarted(false);
+        musicPlayer.ResetOminousBaseline(oceanGenerator.waterPercent);
     }
 
 
