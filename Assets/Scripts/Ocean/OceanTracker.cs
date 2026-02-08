@@ -21,12 +21,13 @@ public class OceanTracker : MonoBehaviour
     {
         generator.AnnounceOceanGenerated += OnOceanGenerated;
     }
+    
 
     public void FlipGameStarted(bool input)
     {
         gameStarted = input;
     }
-
+    
     private void OnOceanGenerated()
     {
         RefreshTracking(generator.allOceanTilesOilComponents);

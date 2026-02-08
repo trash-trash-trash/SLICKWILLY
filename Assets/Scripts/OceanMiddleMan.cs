@@ -28,6 +28,8 @@ public class OceanMiddleMan : MonoBehaviour
     public float acceptableMediumGamePercent = 90f;
     public float acceptableHardGamePercent = 96f;
 
+    public bool gameStartedFr = false;
+
     private void OnEnable()
     {
         menuManager.AnnounceGameStarted += StartGame;
@@ -47,15 +49,27 @@ public class OceanMiddleMan : MonoBehaviour
 
     private void StartGame()
     {
+        gameStartedFr = false;
         percentObj.SetActive(true);
         comboObj.SetActive(true);
         oceanTracker.percentClean = 0;
         oceanTracker.FlipGameStarted(true);
         musicPlayer.ResetOminousBaseline(oceanGenerator.waterPercent);
+
+        StartCoroutine(HackWait());
+    }
+
+    IEnumerator HackWait()
+    {
+        yield return new WaitForSeconds(5f);
+        gameStartedFr = true;
     }
 
     private void EndGame(float obj)
     {
+        if (!gameStartedFr)
+            return;
+        
         float acceptableEndGamePercent = 95f;
         switch (difficultyPicker.currentDifficulty)
         {
