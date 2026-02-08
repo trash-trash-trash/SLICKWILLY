@@ -41,7 +41,7 @@ public class DifficultyPicker : MonoBehaviour
         {
             case Difficulty.Easy:
                 oceanGenerator.oilPercent = 10f;
-                animalController.numberOfDolphins = 3;
+                animalController.numberOfDolphins = 2;
                 animalController.numberOfWhales = 1;
                 animalController.numberOfFrozen = 2;
                 animalController.numberOfBuoys = 1;
@@ -50,7 +50,7 @@ public class DifficultyPicker : MonoBehaviour
             case Difficulty.Medium:
                 oceanGenerator.oilPercent = 30f;
                 
-                animalController.numberOfDolphins = 4;
+                animalController.numberOfDolphins = 3;
                 animalController.numberOfWhales = 1;
                 animalController.numberOfFrozen = 3;
                 animalController.numberOfBuoys = 3;
