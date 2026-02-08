@@ -24,7 +24,6 @@ public class OceanMiddleMan : MonoBehaviour
     public TMP_Text timeTaken;
     public TMP_Text comboText;
 
-    public bool firstTime = true;
     public float acceptableEasyGamePercent = 100f;
     public float acceptableMediumGamePercent = 90f;
     public float acceptableHardGamePercent = 96f;
@@ -50,16 +49,9 @@ public class OceanMiddleMan : MonoBehaviour
     {
         percentObj.SetActive(true);
         comboObj.SetActive(true);
-        oceanTracker.FlipGameStarted(false);
-        musicPlayer.ResetOminousBaseline(oceanGenerator.waterPercent);
-
-        StartCoroutine(TraditionalHackWait());
-    }
-
-    IEnumerator TraditionalHackWait()
-    {
-        yield return new WaitForFixedUpdate();
+        oceanTracker.percentClean = 0;
         oceanTracker.FlipGameStarted(true);
+        musicPlayer.ResetOminousBaseline(oceanGenerator.waterPercent);
     }
 
     private void EndGame(float obj)
@@ -70,36 +62,31 @@ public class OceanMiddleMan : MonoBehaviour
             case Difficulty.Easy:
                 acceptableEndGamePercent = acceptableEasyGamePercent;
                 break;
-             case Difficulty.Medium:
-                 acceptableEndGamePercent = acceptableMediumGamePercent;
-                 break;
-             case Difficulty.Hard:
-                 acceptableEndGamePercent = acceptableHardGamePercent;
-                 break;
+            case Difficulty.Medium:
+                acceptableEndGamePercent = acceptableMediumGamePercent;
+                break;
+            case Difficulty.Hard:
+                acceptableEndGamePercent = acceptableHardGamePercent;
+                break;
         }
-        
+
         if (obj >= acceptableEndGamePercent)
         {
             percentObj.SetActive(false);
-            
+
             comboObj.SetActive(false);
             gameOverCanvasObj.SetActive(true);
 
             comboText.text = "BIGGEST COMBO: " + cleaner.biggestCombo;
-            
+
             timer.Stop();
             if (timer.aNewRecord)
                 aNewRecordText.text = "A NEW RECORD!";
-            else 
+            else
                 aNewRecordText.text = "";
-            
+
             timeTaken.text = timer.bestTime.ToString();
 
-            if (firstTime)
-            {
-                firstTime = false;
-            }
-            
             oceanTracker.FlipGameStarted(false);
         }
     }
@@ -121,6 +108,6 @@ public class OceanMiddleMan : MonoBehaviour
     {
         menuManager.AnnounceGameStarted -= StartGame;
         oceanTracker.AnnouncePercentClean -= EndGame;
-       // oceanGenerator.AnnounceOceanGenerated -= SetRandomSkin;
+        // oceanGenerator.AnnounceOceanGenerated -= SetRandomSkin;
     }
 }

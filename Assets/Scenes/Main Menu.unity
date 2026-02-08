@@ -5893,7 +5893,6 @@ MonoBehaviour:
   aNewRecordText: {fileID: 389691173}
   timeTaken: {fileID: 219156847}
   comboText: {fileID: 1504564828}
-  firstTime: 1
   acceptableEasyGamePercent: 99
   acceptableMediumGamePercent: 90
   acceptableHardGamePercent: 99
@@ -8510,7 +8509,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Programmed and Directed by @trashGameDev Programmed & Voice Acted by OscarSkinner
     Programmed by Cameron Bonde Music by ghstalt Aussie Flag Model by Kenjo SFX by
-    jfournier 18 and Adrian_Gomar Special thanks to Kury & AverageAussie
+    jfournier 18 and Adrian_Gomar Special thanks to Kury & AverageAussie AND YOU
+    FOR PLAYING THANKS!!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
